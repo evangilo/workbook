@@ -11,4 +11,8 @@ urlpatterns = patterns('',
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^$', 'servicos.views.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'categoria/adiciona$', 'servicos.views.categoria.adiciona'),
+    url(r'categoria/$', 'servicos.views.categoria.lista', name='categorias_lista'),
+    url(r'categoria/excluir/(?P<id>\d+)$', 'servicos.views.categoria.excluir', name='categorias_excluir'),
+    url(r'categoria/editar/(?P<id>\d+)$', 'servicos.views.categoria.editar', name='categorias_editar')
 )

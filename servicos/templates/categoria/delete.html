@@ -1,0 +1,9 @@
+{% block content %}
+<legend>Excluir?</legend>
+<p>{{ categoria.descricao }}</p>
+<form action="{% url 'categorias_excluir' categoria.id %}" method="POST">
+{% csrf_token %}
+<input type="submit" class="btn btn-danger" value="Sim">
+<a href="{% url 'categorias_lista' %}" class="btn">Cancelar</a>
+</form>
+{% endblock %}
