@@ -1,0 +1,9 @@
+{% block corpo %}
+<form action="" method="post">
+<table>
+{% csrf_token %}
+{{ form.as_table }}
+</table>
+<button type="submit">Salvar</button>
+</form>
+{% endblock %}
