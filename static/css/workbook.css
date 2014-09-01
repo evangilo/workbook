@@ -1,0 +1,75 @@
+.box-shad {
+    width: 45px;
+    height: 45px;
+    -webkit-box-shadow: 4px 4px 2px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 4px 4px 2px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 2px 2px 1px 0px rgba(50, 50, 50, 0.75);
+}
+
+.text-list {
+  max-width:800px; /* Customise it accordingly */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating-list {
+  line-height: 1;
+  vertical-align: baseline;  
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  white-space: nowrap;
+  font-size:1em;
+  cursor: pointer;
+  float: right;
+}
+
+.rating{
+	unicode-bidi:bidi-override;
+	direction:rtl;
+	font-size:30px;
+}
+
+.rating span.star{
+	font-family:FontAwesome;
+	font-weight:normal;
+	font-style:normal;
+	display:inline-block;
+}
+
+.rating span.star:hover{
+	cursor:pointer;
+}
+
+.rating span.star:before{
+	content:"\f006";
+	padding-right:5px;
+	color:#999999;
+}
+
+.rating span.star:hover:before,.rating span.star:hover~span.star:before{
+	content:"\f005";color:#e3cf7a;
+}
+
+.icon-login {
+    display: block;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5px 0 0 0;
+    margin-right: 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.icon-facebook {
+    background-color: #3b5998;
+}
+
+.icon-google {
+    background-color: #B0281A;
+}
