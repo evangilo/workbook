@@ -24,8 +24,8 @@ class Categoria(models.Model):
 
 class Servico(models.Model):
     usuario = models.ForeignKey(User)
-    categoria = models.ForeignKey(to=Categoria, related_name="categorias")
-    cidade = models.ForeignKey(to=Cidade, related_name="cidades")
+    categoria = models.ForeignKey(Categoria, related_name="servicos")
+    cidade = models.ForeignKey(Cidade, related_name="servicos")
     descricao = models.TextField()
     telefone = models.CharField(max_length=10)
     celular = models.CharField(max_length=11)
