@@ -3,7 +3,7 @@
 	<head>
    	<meta charset="utf-8">
    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   	<meta name="viewport" content="width=device-width, initial-scale=1">
+   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
    	<title>{% block title %}Workbook{% endblock %}</title>
 
    	<link href="/static/css/bootstrap.css" rel="stylesheet">
@@ -15,7 +15,7 @@
     {% include "menu.html" %}
 
    	{% block container %}{% endblock %}
-   	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+   	<script src="/static/js/jquery-1.10.2.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/bootswatch.js"></script>
