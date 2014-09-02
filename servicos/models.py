@@ -24,10 +24,12 @@ class Categoria(models.Model):
     def __unicode__(self):
         return self.descricao
 
+
 class Servico(models.Model):
     usuario = models.ForeignKey(User)
-    categoria = models.ForeignKey(Categoria, related_name="servicos")
-    cidade = models.ForeignKey(Cidade, related_name="servicos")
+    titulo = models.CharField(max_length=50)
+    categorias = models.ManyToManyField(Categoria, related_name="servicos")
+    cidades = models.ManyToManyField(Cidade, related_name="servicos")
     descricao = models.TextField()
     telefone = models.CharField(max_length=10)
     celular = models.CharField(max_length=11)
