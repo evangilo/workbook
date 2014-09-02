@@ -1,0 +1,58 @@
+.icon-login {
+    display: block;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5px 0 0 0;
+    margin-right: 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.icon-facebook {
+    background-color: #3b5998;
+}
+
+.icon-google {
+    background-color: #B0281A;
+}
+
+.rating-list {
+  line-height: 1;
+
+  display: inline-block;
+  min-width: 10px;
+
+  white-space: nowrap;
+  font-size:0.8em;
+  cursor: pointer;
+
+}
+
+.text-list {    
+  text-overflow: ellipsis;
+  -webkit-box-orient: 2;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;  
+  text-overflow: ellipsis;
+}
+
+
+/*.destacados > div > div{    
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.destacados > div:hover > div{
+  margin-top: -10px;
+  border: 1px solid rgb(200, 200, 200);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+  background: rgba(200, 200, 200, 0.1);
+  transition: 0.5s;
+}*/
+
