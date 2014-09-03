@@ -1,0 +1,22 @@
+{% block corpo %}
+<table>
+	<thead>
+		<tr>
+			
+			<th>Título</th>
+			<th>Descrição</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+	{% for item in itens %}
+		<tr>
+		<td>{{ item.titulo}}</td>
+		<td>{{ item.descricao}}</td>
+		
+		</tr>
+	{% endfor %}
+	</tbody>
+
+</table>
+{% endblock %}

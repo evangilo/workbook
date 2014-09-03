@@ -19,4 +19,6 @@ urlpatterns = patterns('',
     url(r'servico/$', 'servicos.views.servico.lista', name='servicos_lista'),
     url(r'servico/excluir/(?P<id>\d+)$', 'servicos.views.servico.excluir', name='servicos_excluir'),
     url(r'servico/editar/(?P<id>\d+)$', 'servicos.views.servico.editar', name='servicos_editar'),
+    url(r'servico/Descricao_servico', 'servicos.views.servico.Descricao_servico', name='Descricao_servico'),
+
 )
