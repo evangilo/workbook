@@ -1,0 +1,31 @@
+{% block corpo %}
+<table>
+	<thead>
+		<tr>
+			<th>Categoria</th>
+			<th>Título</th>
+			<th>Descrição</th>
+			<th>Endereço</th>
+			<th>Telefone</th>
+			<th>Celular</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for item in itens %}
+		<tr>
+		<td>{{ item.categoria}}</td>
+		<td>{{ item.titulo}}</td>
+		<td>{{ item.descricao}}</td>
+		<td>{{ item.telefone}}</td>
+		<td>{{ item.celular}}</td>
+		<td>
+			<a href="{% url 'servicos_editar' item.id %}" class="btn btn-small"><i class="icon-edit" title="Alterar"></i> alterar</a>
+			<a href="{% url 'servicos_excluir' item.id %}" class="btn btn-small"><i class="icon-remove"title="Excluir"> excluir</i></a>
+		</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+
+<a href="adiciona">Adicionar</a>
+</table>
+{% endblock %}

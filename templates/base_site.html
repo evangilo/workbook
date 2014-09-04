@@ -9,12 +9,12 @@
    	<link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/workbook.css" rel="stylesheet">
     <link href="/static/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    {%block head %}{% endblock %}
+    {% block extrahead %}{% endblock %}
 </head>
 <body>
     {% include "menu.html" %}
 
-   	{% block container %}{% endblock %}
+   	{% block content %}{% endblock %}
    	<script src="/static/js/jquery-1.10.2.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>

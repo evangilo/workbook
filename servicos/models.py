@@ -20,7 +20,7 @@ class Cidade(models.Model):
 
 class Categoria(models.Model):
     descricao = models.CharField(max_length=20)
-    
+
     def __unicode__(self):
         return self.descricao
 
@@ -28,8 +28,10 @@ class Categoria(models.Model):
 class Servico(models.Model):
     usuario = models.ForeignKey(User)
     titulo = models.CharField(max_length=50)
-    categorias = models.ManyToManyField(Categoria, related_name="servicos")
-    cidades = models.ManyToManyField(Cidade, related_name="servicos")
+    categorias = models.ManyToManyField(Categoria, blank=True,
+                                        related_name="servicos")
+    cidades = models.ManyToManyField(Cidade, blank=True,
+                                     related_name="servicos")
     descricao = models.TextField()
     telefone = models.CharField(max_length=10)
     celular = models.CharField(max_length=11)
