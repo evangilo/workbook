@@ -1,0 +1,22 @@
+{% block corpo %}
+<table>
+	<thead>
+		<tr>
+			<th>Comentário</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for item in itens %}
+		<tr>
+		<td>{{ item.comentario}}</td>
+		<td>
+			<a href="{% url 'avaliacoes_editar' item.id %}" class="btn btn-small"><i class="icon-edit" title="Alterar"></i> alterar</a>
+			<a href="{% url 'avaliacoes_excluir' item.id %}" class="btn btn-small"><i class="icon-remove"title="Excluir"> excluir</i></a>
+		</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+
+<a href="adicionar">Adicionar</a>
+</table>
+{% endblock %}

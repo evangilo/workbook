@@ -24,6 +24,12 @@ class Categoria(models.Model):
     def __unicode__(self):
         return self.descricao
 
+class Avaliacao(models.Model):
+
+    avalista = models.ForeignKey(User)
+    nota = models.IntegerField(max_length=5)
+    comentario = models.TextField(max_length=150)
+    resposta = models.TextField(max_length=200)
 
 class Servico(models.Model):
     usuario = models.ForeignKey(User)

@@ -1,0 +1,11 @@
+{% block content %}
+<legend>Excluir?</legend>
+<p>{{ avaliacao.comentario }}</p>
+<p>{{ avaliacao.nota }}</p>
+
+<form action="{% url 'avaliacoes_excluir' avaliacao.id %}" method="POST">
+{% csrf_token %}
+<input type="submit" class="btn btn-danger" value="Sim">
+<a href="{% url 'avaliacoes_lista' %}" class="btn">Cancelar</a>
+</form>
+{% endblock %}
