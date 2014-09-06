@@ -5,20 +5,20 @@
    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
    	<title>{% block title %}Workbook{% endblock %}</title>
-
    	<link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/workbook.css" rel="stylesheet">
     <link href="/static/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
     {% block extrahead %}{% endblock %}
-</head>
+  </head>
 <body>
-    {% include "menu.html" %}
-
-   	{% block content %}{% endblock %}
-   	<script src="/static/js/jquery-1.10.2.min.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/bootswatch.js"></script>
-    <script src="/static/js/workbook.js"></script>
+  {% include "menu.html" %}
+  <div class="container">
+{% block content %}{% endblock %}
+  </div><!--/container-->
+  <script src="/static/js/jquery-1.10.2.min.js"></script>
+  <script src="/static/js/bootstrap.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/bootswatch.js"></script>
+  <script src="/static/js/workbook.js"></script>
 </body>
 </html>

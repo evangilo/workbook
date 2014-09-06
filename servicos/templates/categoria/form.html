@@ -1,9 +1,12 @@
-{% block corpo %}
-<form action="" method="post">
-<table>
-{% csrf_token %}
-{{ form.as_table }}
-</table>
-<button type="submit">Salvar</button>
-</form>
+{% extends 'base_site.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    <div class="page-header">
+      <h4>Categoria</h4>
+    </div>
+    <form class="form" role="form" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons submit='Salvar' %}{% endbuttons %}
+    </form>
 {% endblock %}

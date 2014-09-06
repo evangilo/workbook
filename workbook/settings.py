@@ -16,8 +16,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'south',
     'django_extensions',
+    'bootstrap3',
     'social.apps.django_app.default',
     'servicos'
 )
