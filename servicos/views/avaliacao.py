@@ -16,37 +16,41 @@ def lista(request):
 
 AvaliacaoForm = modelform_factory(Avaliacao)
 
-def adiciona(request):
-	if request.method == 'POST':
-		form = AvaliacaoForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect("/avaliacao")
-	else:
-		form = AvaliacaoForm()
-	return render_to_response('avaliacao/form.html', {'form': form},context_instance=RequestContext(request))
+
+def adicionar(request):
+    if request.method == 'POST':
+        form = AvaliacaoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/avaliacao")
+    else:
+        form = AvaliacaoForm()
+    return render_to_response('avaliacao/form.html', {'form': form},
+                              context_instance=RequestContext(request))
+
 
 def excluir(request, id):
-	avaliacao = Avaliacao.objects.get(pk=id)
-	if request.method == "POST":
-		avaliacao.delete()
-		return HttpResponseRedirect('/avaliacao')
+    avaliacao = Avaliacao.objects.get(pk=id)
+    if request.method == "POST":
+        avaliacao.delete()
+        return HttpResponseRedirect('/avaliacao')
 
-	context = RequestContext(request, {'avaliacao': avaliacao})
-	return render_to_response('avaliacao/delete.html', context)
+    context = RequestContext(request, {'avaliacao': avaliacao})
+    return render_to_response('avaliacao/delete.html', context)
+
 
 def editar(request, id):
-	avaliacao = Avaliacao.objects.get(pk=id)
+    avaliacao = Avaliacao.objects.get(pk=id)
 
-	if request.method == 'POST':
-		form = AvaliacaoForm(request.POST, instance=avaliacao)
-		
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect('avaliacao/')
+    if request.method == 'POST':
+        form = AvaliacaoForm(request.POST, instance=avaliacao)
 
-	else:
-		form = AvaliacaoForm(instance=avaliacao)
-			
-	context = RequestContext(request, {'form': form, 'id': id})
-	return render_to_response('avaliacao/form.html', context)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('avaliacao/')
+
+    else:
+        form = AvaliacaoForm(instance=avaliacao)
+
+    context = RequestContext(request, {'form': form, 'id': id})
+    return render_to_response('avaliacao/form.html', context)

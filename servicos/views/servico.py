@@ -15,12 +15,12 @@ def Descricao_servico(request, id):
                               {'itens': servico})
 
 
-def lista(request):
+def listar(request):
     servicos = Servico.objects.all()
     return render_to_response('servico/lista.html', {'itens': servicos})
 
 
-def adiciona(request):
+def adicionar(request):
     if request.method == 'POST':
         form = ServicoForm(request.POST, request.FILES)
         if form.is_valid():

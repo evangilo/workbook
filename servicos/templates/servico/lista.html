@@ -1,29 +1,30 @@
 {% extends 'base_site.html' %}
 
 {% block content %}
-    <div class="container">
-      <div class="page-header">
-        <h4>Resultados da pesquisa</h4>
-      </div>
-      <div class="row">
+    <div class="page-header">
+      <h4>Lista de serviços</h4>
+    </div>
+    <div class="row">
 {% for item in itens %}
-        <div class="col-xs-6 col-sm-3">
-          <div class="panel panel-default">
-            <div class="panel-thumbnail"><a href="#"><img src="//placehold.it/450X300/DD3333/EE3333" class="img-responsive"></a></div>
-            <div class="panel-heading">
-              <div class="rating-list pull-right">
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>          
-              </div>
-              <h6>{{ item.titulo }}</h6>
+      <div class="col-xs-6 col-sm-3">
+        <div class="panel panel-default">
+          <div class="panel-thumbnail"><a href="{% url 'servico_detalhes' %}"><img src="//placehold.it/450X300/DD3333/EE3333" class="img-responsive"></a></div>
+          <div class="panel-heading">
+            <div class="rating-list pull-right">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-o"></span>
+              <span class="fa fa-star-o"></span>
+              <span class="fa fa-star-o"></span>          
             </div>
-            <div class="panel-body hidden-xs">            
-              <p class="text-list">{{ item.descricao }}</p>                        
-            </div>
+            <h6><a href="{% url 'servico_detalhes' %}">{{ item.titulo }}</a></h6>
           </div>
-        </div><!--/col-->
+          <div class="panel-body hidden-xs">            
+            <p class="text-list">{{ item.descricao }}</p>                        
+          </div>
+        </div>
+      </div><!--/col-->
 {% endfor %}
+    </div>
+    <a class="btn btn-primary" href="{% url 'servico_adicionar' %}">Adicionar</a>
 {% endblock %}

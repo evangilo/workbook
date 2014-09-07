@@ -1,9 +1,10 @@
+{% extends 'base_site.html' %}
 {% block content %}
 <legend>Excluir?</legend>
 <p>{{ servico.titulo }}</p>
-<form action="{% url 'categorias_excluir' categoria.id %}" method="POST">
+<form action="{% url 'categoria_excluir' categoria.id %}" method="POST">
 {% csrf_token %}
-<input type="submit" class="btn btn-danger" value="Sim">
-<a href="{% url 'categorias_lista' %}" class="btn">Cancelar</a>
+<button type="submit" class="btn btn-danger">Sim</button>
+<a href="{% url 'categoria_lista' %}" class="btn">Não</a>
 </form>
 {% endblock %}
