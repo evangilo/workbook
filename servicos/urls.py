@@ -26,7 +26,10 @@ urlpatterns = patterns(
     url(r'servico/editar/(?P<id>\d+)$', 'servico.editar',
         name='servicos_editar'),
 
-    url(r'servico/Descricao_servico', 'servico.Descricao_servico',
+    url(r'avaliacao/comentarios/(?P<id>\d+)$', 'avaliacao.Comentarios',
+        name='comentarios'),
+
+    url(r'servico/descricao_servico/(?P<id>\d+)$', 'servico.Descricao_servico',
         name='servico_detalhes'),
 
     url(r'avaliacao/adicionar$', 'avaliacao.adiciona',

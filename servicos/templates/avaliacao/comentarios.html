@@ -1,0 +1,18 @@
+{% block corpo %}
+<table>
+	<thead>
+		<tr>
+			<th>Comentários</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for item in comentario %}
+		<tr>
+		<td>{{ item.comentario}}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+
+<a href="adicionar">Adicionar</a>
+</table>
+{% endblock %}

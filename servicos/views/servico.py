@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __builtin__ import id
 from django.forms.models import modelform_factory
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -8,9 +9,9 @@ from servicos.models import Servico
 ServicoForm = modelform_factory(Servico)
 
 
-def Descricao_servico(request):
-    servico = Servico.objects.all()
-    return render_to_response('servico/Descricao_servico.html',
+def Descricao_servico(request, id):
+    servico = Servico.objects.filter()
+    return render_to_response('detalhes_servico/descricao_servico.html',
                               {'itens': servico})
 
 

@@ -6,7 +6,10 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
-
+def Comentarios(request):
+    comentario = Avaliacao.objects.filter()
+    return render_to_response('avaliacao/comentarios.html',
+                              {'itens': comentario})
 def lista(request):
 	avaliacao = Avaliacao.objects.all()
 	return render_to_response('avaliacao/lista.html', {'itens': avaliacao})
