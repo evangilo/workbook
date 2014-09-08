@@ -9,8 +9,9 @@ from django.http import HttpResponseRedirect
 def Comentarios(request):
     comentario = Avaliacao.objects.filter()
     return render_to_response('avaliacao/comentarios.html',
+
                               {'itens': comentario})
-def lista(request):
+def listar(request):
 	avaliacao = Avaliacao.objects.all()
 	return render_to_response('avaliacao/lista.html', {'itens': avaliacao})
 
