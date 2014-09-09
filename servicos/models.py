@@ -41,8 +41,7 @@ class Avaliacao(models.Model):
 class Servico(models.Model):
     usuario = models.ForeignKey(User)
     titulo = models.CharField(max_length=50, verbose_name='título')
-    nota = models.PositiveIntegerField(editable=False, validators=[
-        MaxValueValidator(5), MinValueValidator(1)])
+    nota = models.PositiveIntegerField(editable=False, default=0)
     categorias = models.ManyToManyField(Categoria, blank=True,
                                         related_name="servicos")
     cidades = models.ManyToManyField(Cidade, blank=True,
