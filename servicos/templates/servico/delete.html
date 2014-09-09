@@ -4,6 +4,6 @@
 <form action="{% url 'servicos_excluir' servico.id %}" method="POST">
 {% csrf_token %}
 <input type="submit" class="btn btn-danger" value="Sim">
-<a href="{% url 'servicos_lista' %}" class="btn">Cancelar</a>
+<a href="{% url 'servicos_listar' %}" class="btn">Cancelar</a>
 </form>
 {% endblock %}

@@ -5,6 +5,6 @@
 <form action="{% url 'categoria_excluir' categoria.id %}" method="POST">
 {% csrf_token %}
 <button type="submit" class="btn btn-danger">Sim</button>
-<a href="{% url 'categoria_lista' %}" class="btn">Não</a>
+<a href="{% url 'categoria_listar' %}" class="btn">Não</a>
 </form>
 {% endblock %}
