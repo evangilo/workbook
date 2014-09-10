@@ -3,3 +3,4 @@ dj-database-url==0.3.0
 django-extensions==1.4.0
 python-social-auth==0.1.26
 django-bootstrap3==4.11.0
+Django-Select2==4.2.2

@@ -1,12 +1,39 @@
 {% extends 'base_site.html' %}
+{% load django_select2_tags %}
 {% load bootstrap3 %}
+
+{% block extrahead %}
+{{ block.super }}
+    {% import_django_select2_css  %}
+    {% import_django_select2_js %}
+{% endblock %}
+
 {% block content %}
     <div class="page-header">
-      <h4>Categoria</h4>
+      <h4>Serviço</h4>
     </div>
-		<form action="" method="post">
-		{% csrf_token %}
-		{% bootstrap_form form %}
-		{% buttons submit='Salvar' %}{% endbuttons %}
-		</form>
+	<form action="" method="post">{% csrf_token %}
+	{% bootstrap_form_errors form %}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-2">{% bootstrap_label form.titulo.label label_class='control-label' %}</div>
+				<div class="col-md-10">{% bootstrap_field form.titulo show_label=False %}</div>
+				<div class="col-md-2">{% bootstrap_label form.telefone.label %}</div>
+				<div class="col-md-10">{% bootstrap_field form.telefone show_label=False %}</div>
+				<div class="col-md-2">{% bootstrap_label form.celular.label %}</div>
+				<div class="col-md-10">{% bootstrap_field form.celular show_label=False %}</div>
+			</div></div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-2">{% bootstrap_label form.categorias.label %}</div>
+				<div class="col-md-10">{% bootstrap_field form.categorias show_label=False %}</div>
+				<div class="col-md-2">{% bootstrap_label form.cidades.label %}</div>
+				<div class="col-md-10">{% bootstrap_field form.cidades show_label=False %}</div>
+			</div>
+		</div>
+		<div class="col-md-12">{% bootstrap_field form.descricao %}</div>
+	</div>
+	{% buttons submit='Salvar' %}{% endbuttons %}
+	</form>
 {% endblock %}

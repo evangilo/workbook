@@ -17,6 +17,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_select2',
     'bootstrap3',
     'social.apps.django_app.default',
     'servicos'
@@ -122,3 +123,7 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email',]
 #LOGIN_URL = '/login/'
 #LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+AUTO_RENDER_SELECT2_STATICS = False
+SELECT2_BOOTSTRAP = True
+ENABLE_SELECT2_MULTI_PROCESS_SUPPORT = False

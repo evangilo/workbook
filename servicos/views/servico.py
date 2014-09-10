@@ -4,9 +4,8 @@ from django.forms.models import modelform_factory
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from ..forms import ServicoForm
 from servicos.models import Servico
-
-ServicoForm = modelform_factory(Servico)
 
 
 def Descricao_servico(request, id):
@@ -24,7 +23,9 @@ def adicionar(request):
     if request.method == 'POST':
         form = ServicoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            servico = form.save(commit=False)
+            servico.usuario = request.user
+            servico.save()
             return HttpResponseRedirect("/servico")
     else:
         form = ServicoForm()
