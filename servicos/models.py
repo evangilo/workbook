@@ -17,11 +17,11 @@ class Cidade(models.Model):
     estado = models.ForeignKey(Estado)
 
     def __unicode__(self):
-        return self.nome
+        return '%s, %s' % (self.nome, self.estado.sigla)
 
 
 class Categoria(models.Model):
-    nome = models.CharField(max_length=20)
+    nome = models.CharField(max_length=20, unique=True)
 
     def __unicode__(self):
         return self.nome
@@ -39,7 +39,7 @@ class Avaliacao(models.Model):
 
 
 class Servico(models.Model):
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(User, editable=False)
     titulo = models.CharField(max_length=50, verbose_name='título')
     nota = models.PositiveIntegerField(editable=False, default=0)
     categorias = models.ManyToManyField(Categoria, blank=True,
