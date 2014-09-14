@@ -30,7 +30,7 @@ def adicionar(request):
             servico = form.save(commit=False)
             servico.usuario = request.user
             servico.save()
-            return HttpResponseRedirect("/servico")
+            return HttpResponseRedirect("/")
     else:
         form = ServicoForm()
     return render_to_response('servico/form.html', {'form': form},
@@ -41,7 +41,7 @@ def excluir(request, id):
     servico = Servico.objects.get(pk=id)
     if request.method == "POST":
         servico.delete()
-        return HttpResponseRedirect('/servico')
+        return HttpResponseRedirect('/')
 
     context = RequestContext(request, {'servico': servico})
     return render_to_response('servico/delete.html', context)
@@ -55,7 +55,7 @@ def editar(request, id):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('servico/')
+            return HttpResponseRedirect('/')
 
     else:
         form = ServicoForm(instance=servico)
