@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-from __builtin__ import id
-from django.forms.models import modelform_factory
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from ..forms import ServicoForm
 from servicos.models import Servico
+from django.db.models import Q
 
 
-def Descricao_servico(request, id):
+def descrever_servico(request, id):
     servico = Servico.objects.filter()
     return render_to_response('detalhes_servico/descricao_servico.html',
                               {'itens': servico})
@@ -16,6 +15,11 @@ def Descricao_servico(request, id):
 
 def listar(request):
     servicos = Servico.objects.all()
+    q = request.GET.get('q', '')
+    if q != '':
+        servicos = servicos.filter(Q(titulo__icontains=q) |
+                                   Q(descricao__icontains=q) |
+                                   Q(categorias__nome__icontains=q)).distinct()
     return render_to_response('servico/lista.html', {'itens': servicos})
 
 
@@ -58,3 +62,9 @@ def editar(request, id):
 
     context = RequestContext(request, {'form': form, 'id': id})
     return render_to_response('servico/form.html', context)
+
+
+def listar_servicos_usuario(request):
+    servicos = Servico.objects.all().filter(Q(usuario=request.user))
+    return render_to_response('detalhes_servico/descricao_servico.html',
+                              {'itens': servicos})

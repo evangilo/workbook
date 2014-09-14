@@ -29,12 +29,25 @@
                                     </a>
                                 </li>
                             </ul>
+                    </li>
                     {% else %}
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}<span class="caret"></span></a>
+                    <li>
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Serviço</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="{% url 'servico_adicionar' %}">Novo Serviço</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="{% url 'meus_servicos' %}">Meus Serviços</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ user }}<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                                 <li role="presentation">
                                     <a role="menuitem" tabindex="-1"
-                                       href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">
+                                       href="#">
                                         <i class="fa fa-gear"></i>  profile
                                     </a>
                                 </li>

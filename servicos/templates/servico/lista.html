@@ -17,7 +17,7 @@
               <span class="fa fa-star-o"></span>
               <span class="fa fa-star-o"></span>          
             </div>
-            <h6><a href="{% url 'servico_detalhes' item.id %}">{{ item.titulo }}</a></h6>
+            <h6><a class="titulo-servico" href="{% url 'servico_detalhes' item.id %}">{{ item.titulo }}</a></h6>
           </div>
           <div class="panel-body hidden-xs">            
             <p class="text-list">{{ item.descricao }}</p>                        
@@ -26,5 +26,4 @@
       </div><!--/col-->
 {% endfor %}
     </div>
-    <a class="btn btn-primary" href="{% url 'servico_adicionar' %}">Adicionar</a>
 {% endblock %}
