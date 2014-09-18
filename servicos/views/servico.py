@@ -19,7 +19,9 @@ def listar(request):
     if q != '':
         servicos = servicos.filter(Q(titulo__icontains=q) |
                                    Q(descricao__icontains=q) |
-                                   Q(categorias__nome__icontains=q)).distinct()
+                                   Q(categorias__nome__icontains=q) |
+                                   Q(cidades__nome__icontains=q) |
+                                   Q(usuario__username__icontains=q)).distinct()
     return render_to_response('servico/lista.html', {'itens': servicos})
 
 
