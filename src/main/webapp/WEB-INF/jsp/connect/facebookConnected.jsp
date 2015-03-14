@@ -1,0 +1,15 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<html>
+<head>
+<title>Hello Facebook</title>
+</head>
+<body>
+	<h3>Connected to Facebook</h3>
+
+	<p>
+		You are now connected to your Facebook account. Click <a href="/">here</a>
+		to see some entries from your Facebook home feed.
+	</p>
+</body>
+</html>
