@@ -1,9 +1,17 @@
 <div class="form-group">
-	<form:label path="nome" class="col-sm-2 control-label">Nome</form:label>
+	<form:label path="firstName" class="col-sm-2 control-label">Nome</form:label>
 	<div class="col-sm-10">
-		<form:input path="nome" value="${usuario.nome}" class="form-control" />
+		<form:input path="firstName" value="${usuario.firstName}" class="form-control" />
 	</div>
 </div>
+
+<div class="form-group">
+	<form:label path="lastName" class="col-sm-2 control-label">Sobrenome</form:label>
+	<div class="col-sm-10">
+		<form:input path="lastName" value="${usuario.lastName}" class="form-control" />
+	</div>
+</div>
+
 <div class="form-group">
 	<form:label path="email" class="col-sm-2 control-label">Email</form:label>
 	<div class="col-sm-10">
