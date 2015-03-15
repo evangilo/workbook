@@ -25,6 +25,11 @@
 			</tr>
 		</table>
 	</form>
+	
+	<form action="/connect/facebook" method="POST">
+		<input type="hidden" name="scope" value="read_stream" />
+		<button type="submit">Connect to Facebook</button>
+	</form>
 
 </body>
 </html>

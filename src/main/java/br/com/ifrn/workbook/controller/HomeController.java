@@ -24,7 +24,7 @@ public class HomeController {
     @RequestMapping(method=RequestMethod.GET)
     public String helloFacebook(Model model) {
         if (!facebook.isAuthorized()) {
-            return "redirect:/connect/facebook";
+            return "base/login";
         }
 
         model.addAttribute(facebook.userOperations().getUserProfile());
