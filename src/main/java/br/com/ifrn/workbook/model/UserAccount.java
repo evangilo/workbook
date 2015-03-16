@@ -2,6 +2,8 @@ package br.com.ifrn.workbook.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +32,14 @@ public class UserAccount {
 
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;	
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role", length = 20, nullable = false)
+	private Role role;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sign_in_provider", length = 20)
+	private SocialMediaService signInProvider;
 	
 	public UserAccount() { }
 
@@ -80,4 +90,21 @@ public class UserAccount {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public SocialMediaService getSignInProvider() {
+		return signInProvider;
+	}
+
+	public void setSignInProvider(SocialMediaService signInProvider) {
+		this.signInProvider = signInProvider;
+	}
+	
 }
