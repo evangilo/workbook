@@ -2,7 +2,7 @@ package br.com.ifrn.workbook.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class UsuarioForm {
+public class UserForm {
 	
 	@NotEmpty private String nome;
 	@NotEmpty private String username = "";

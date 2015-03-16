@@ -11,48 +11,48 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.ifrn.workbook.model.Usuario;
-import br.com.ifrn.workbook.service.usuario.UsuarioService;
+import br.com.ifrn.workbook.model.UserAccount;
+import br.com.ifrn.workbook.service.UserService;
 
 @RestController
 @RequestMapping(value = "usuario", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsuarioController {
+public class UserController {
 	
-	@Inject private UsuarioService usuarioService;
+	@Inject private UserService userService;
 	
 	@RequestMapping(value="criar", method=RequestMethod.GET)
 	public ModelAndView form() {
-		return new ModelAndView("usuario/criar", "usuario", new Usuario());
+		return new ModelAndView("usuario/criar", "usuario", new UserAccount());
 	}
 	
 	@RequestMapping(value = "criar", method= RequestMethod.POST)
-	public ModelAndView criar(@ModelAttribute Usuario usuario) {
-		usuarioService.registerNewUserAccount(usuario);
+	public ModelAndView criar(@ModelAttribute UserAccount usuario) {
+		userService.registerNewUserAccount(usuario);
 		return new ModelAndView("redirect:/");
 	}
 	
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "editar/{id}", method = RequestMethod.GET )
 	public ModelAndView editar(@PathVariable Long id) {
-		return new ModelAndView("usuario/editar", "usuario", usuarioService.getById(id));
+		return new ModelAndView("usuario/editar", "usuario", userService.getById(id));
 	}
 	
 	@RequestMapping(value = "editar/{id}", method = RequestMethod.POST)
-	public ModelAndView editar(@ModelAttribute Usuario usuario, @PathVariable Long id) {
+	public ModelAndView editar(@ModelAttribute UserAccount usuario, @PathVariable Long id) {
 		usuario.setId(id);
-		usuarioService.update(usuario);
+		userService.update(usuario);
 		return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping(value = "deletar/{id}")
 	public ModelAndView deletar(@PathVariable Long id) {
-		usuarioService.delete(id);
+		userService.delete(id);
 		return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping(value = "listar", method = RequestMethod.GET) 
 	public ModelAndView listar() {
-		return new ModelAndView("usuario/listar", "usuarios", usuarioService.getAll());
+		return new ModelAndView("usuario/listar", "usuarios", userService.getAll());
 	}
 	
 }

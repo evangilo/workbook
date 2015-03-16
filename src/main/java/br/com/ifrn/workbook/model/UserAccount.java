@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class UserAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Usuario {
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;	
 	
-	public Usuario() { }
+	public UserAccount() { }
 
 	public Long getId() {
 		return id;

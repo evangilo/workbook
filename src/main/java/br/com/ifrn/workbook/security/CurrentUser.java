@@ -1,15 +1,30 @@
 package br.com.ifrn.workbook.security;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import br.com.ifrn.workbook.model.UserAccount;
 
-@Target(ElementType.PARAMETER)
-@Retention(RetentionPolicy.RUNTIME)
-@AuthenticationPrincipal
-public @interface CurrentUser {
 
+public class CurrentUser extends User{
+
+	private static final long serialVersionUID = 1L;
+	
+	private UserAccount user;
+	
+	public CurrentUser(UserAccount user) {
+		super(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
+		this.user = user;
+	}
+	
+	public UserAccount getUser() {
+		return user;
+	}
+	
+	public Long getId() {
+		return user.getId();
+	}
+	
+
+	
 }

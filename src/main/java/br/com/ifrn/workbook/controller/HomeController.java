@@ -29,7 +29,7 @@ public class HomeController {
 
         model.addAttribute(facebook.userOperations().getUserProfile());
         PagedList<Post> homeFeed = facebook.feedOperations().getHomeFeed();
-        model.addAttribute("feed", homeFeed);
+        model.addAttribute("feed", homeFeed);                
 
         return "home";
     }

@@ -1,4 +1,4 @@
-package br.com.ifrn.workbook.service.usuario;
+package br.com.ifrn.workbook.service;
 
 import java.io.Serializable;
 import java.util.List;

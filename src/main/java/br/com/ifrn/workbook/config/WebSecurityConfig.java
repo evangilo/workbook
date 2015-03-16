@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.com.ifrn.workbook.repository.CurrentUserDetailsService;
+import br.com.ifrn.workbook.security.CurrentUserDetailsService;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -19,7 +19,7 @@ import br.com.ifrn.workbook.repository.CurrentUserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Inject
-	private CurrentUserDetailsService usuarioDetailsService;
+	private CurrentUserDetailsService userDetailsService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)throws Exception {
-		auth.userDetailsService(usuarioDetailsService)
+		auth.userDetailsService(userDetailsService)
 		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
