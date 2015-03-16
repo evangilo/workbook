@@ -6,6 +6,7 @@
 <title>WorkBook</title>
 </head>
 <body>
+	<p>${pageContext.request.remoteUser}</p>
 	<form:form modelAttribute="usuario" method="post" class="form-horizontal" action="${pageContext.request.contextPath}/usuario/criar">
 		<%@ include file="form.jsp" %>
 		<div class="form-group">

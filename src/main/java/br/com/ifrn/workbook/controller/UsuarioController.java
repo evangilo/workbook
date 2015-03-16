@@ -3,6 +3,7 @@ package br.com.ifrn.workbook.controller;
 import javax.inject.Inject;
 
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +27,11 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "criar", method= RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute Usuario usuario) {
-		usuarioService.create(usuario);
+		usuarioService.registerNewUserAccount(usuario);
 		return new ModelAndView("redirect:/");
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "editar/{id}", method = RequestMethod.GET )
 	public ModelAndView editar(@PathVariable Long id) {
 		return new ModelAndView("usuario/editar", "usuario", usuarioService.getById(id));

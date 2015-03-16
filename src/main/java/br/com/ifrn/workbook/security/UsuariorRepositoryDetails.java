@@ -1,55 +1,29 @@
 package br.com.ifrn.workbook.security;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
 
 import br.com.ifrn.workbook.model.Usuario;
 
-public class UsuariorRepositoryDetails implements UserDetails {
+public class UsuariorRepositoryDetails extends User{
 
 	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario;
 	
 	public UsuariorRepositoryDetails(Usuario usuario) {
+		super(usuario.getEmail(), usuario.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
 		this.usuario = usuario;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return AuthorityUtils.createAuthorityList("ROLE_USER");
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 	
-	@Override
-	public String getUsername() {
-		return usuario.getEmail();
+	public Long getId() {
+		return usuario.getId();
 	}
 	
-	@Override
-	public String getPassword() {
-		return usuario.getPassword();
-	}	
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+	
 }

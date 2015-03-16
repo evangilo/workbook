@@ -12,12 +12,12 @@ import br.com.ifrn.workbook.security.UsuariorRepositoryDetails;
 import br.com.ifrn.workbook.service.usuario.UsuarioService;
 
 @Service
-public class UsuarioRepositoryUserDetailsService implements UserDetailsService {
+public class CurrentUserDetailsService implements UserDetailsService {
 	
 	private final UsuarioService service;
 	
 	@Inject
-	public UsuarioRepositoryUserDetailsService(UsuarioService usuarioService) {
+	public CurrentUserDetailsService(UsuarioService usuarioService) {
 		this.service = usuarioService;
 	}
 	

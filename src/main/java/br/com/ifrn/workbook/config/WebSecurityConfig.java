@@ -2,23 +2,24 @@ package br.com.ifrn.workbook.config;
 
 import javax.inject.Inject;
 
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.com.ifrn.workbook.repository.UsuarioRepositoryUserDetailsService;
+import br.com.ifrn.workbook.repository.CurrentUserDetailsService;
 
 @Configuration
-@EnableWebMvcSecurity
-//@ComponentScan(basePackageClasses=UsuarioRepositoryUserDetailsService.class)
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Inject
+	private CurrentUserDetailsService usuarioDetailsService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -38,12 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 		.and()
 		 	.logout()
 		 		.permitAll();
-	}	
+	}		
 	
-	@Inject
-	public void configureGlobal(UsuarioRepositoryUserDetailsService userDetailsService, AuthenticationManagerBuilder auth) throws Exception {
-		//auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ROLE_USER", "ROLE_ADMIN");
-		auth.userDetailsService(userDetailsService);
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth)throws Exception {
+		auth.userDetailsService(usuarioDetailsService)
+		.passwordEncoder(new BCryptPasswordEncoder());
 	}
-
+	
 }
