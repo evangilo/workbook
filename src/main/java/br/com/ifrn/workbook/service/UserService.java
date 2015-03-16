@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.ifrn.workbook.model.UserAccount;
@@ -15,12 +15,14 @@ import br.com.ifrn.workbook.repository.UserRepository;
 public class UserService extends BaseService<UserAccount, Long> {
 	
 	private UserRepository userRepository;
+	private PasswordEncoder passwordEncoder;
 	
 	
 	@Inject
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		super(userRepository);
 		this.userRepository = userRepository;		
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public UserAccount getByEmail(String email) {
@@ -38,7 +40,7 @@ public class UserService extends BaseService<UserAccount, Long> {
 	}
 	
 	private String encodePassword(String password) {
-		return new BCryptPasswordEncoder().encode(password);
+		return passwordEncoder.encode(password);
 	}
 	
 }
