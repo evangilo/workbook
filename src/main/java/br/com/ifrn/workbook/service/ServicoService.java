@@ -33,6 +33,6 @@ public class ServicoService extends BaseService<Servico, Long> {
 
 	public List<Servico> findServicos(Long usuarioId) {
 		return servicoRepository.findByUsuarioOrderByMediaDesc(usuarioId);
-	}
+	}	
 		
 }
