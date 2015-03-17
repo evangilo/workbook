@@ -37,9 +37,7 @@
 									<layout:stars value="${servico.media}" />
 								</div>
 								<div>
-									<a
-										href="<c:url value='/destaques/solicitar'/>?svc=${servico.id}">Colocar
-										em detaque</a>
+									<a href="/destaques/solicitar/${servico.id}">Colocar em detaque</a>
 								</div>
 							</div>
 						</div>

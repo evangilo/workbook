@@ -31,6 +31,10 @@ public class Destaque extends BaseEntity<Long> {
 	private int tempo;
 	
 	private int situacao;
+	
+	public static final int PENDENTE  = 1;
+	public static final int APROVADO  = 2;
+	public static final int CANCELADO = 3;
 
 	@PrePersist
 	private void onPrePersist() {
