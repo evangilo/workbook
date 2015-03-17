@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.ifrn.workbook.model.UserAccount;
+import br.com.ifrn.workbook.model.user.Role;
+import br.com.ifrn.workbook.model.user.UserAccount;
 import br.com.ifrn.workbook.service.UserService;
 
 @RestController
@@ -27,6 +28,7 @@ public class UserController {
 	
 	@RequestMapping(value = "criar", method= RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute UserAccount usuario) {
+		usuario.setRole(Role.ROLE_USER);
 		userService.registerNewUserAccount(usuario);
 		return new ModelAndView("redirect:/");
 	}

@@ -1,4 +1,4 @@
-package br.com.ifrn.workbook.model;
+package br.com.ifrn.workbook.model.user;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

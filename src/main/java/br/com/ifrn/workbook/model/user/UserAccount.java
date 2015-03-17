@@ -1,4 +1,4 @@
-package br.com.ifrn.workbook.model;
+package br.com.ifrn.workbook.model.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "usuario")
-public class UserAccount {
+import br.com.ifrn.workbook.model.BaseEntity;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+@Entity
+@Table(name = "user_account")
+public class UserAccount extends BaseEntity<Long> {
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", nullable = false)
 	private Long id;
 
 	@Column(name = "first_name", nullable = false)
@@ -43,6 +44,7 @@ public class UserAccount {
 	
 	public UserAccount() { }
 
+	@Override
 	public Long getId() {
 		return id;
 	}

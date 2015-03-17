@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.ifrn.workbook.model.UserAccount;
+import br.com.ifrn.workbook.model.user.UserAccount;
 import br.com.ifrn.workbook.repository.UserRepository;
 
 @Service

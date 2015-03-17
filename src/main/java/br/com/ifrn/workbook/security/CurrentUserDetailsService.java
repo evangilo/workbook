@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifrn.workbook.model.UserAccount;
+import br.com.ifrn.workbook.model.user.UserAccount;
 import br.com.ifrn.workbook.service.UserService;
 
 @Service

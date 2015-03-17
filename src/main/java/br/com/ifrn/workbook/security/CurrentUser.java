@@ -3,7 +3,7 @@ package br.com.ifrn.workbook.security;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
-import br.com.ifrn.workbook.model.UserAccount;
+import br.com.ifrn.workbook.model.user.UserAccount;
 
 
 public class CurrentUser extends User{

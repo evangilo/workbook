@@ -1,4 +1,4 @@
-package br.com.ifrn.workbook.model;
+package br.com.ifrn.workbook.model.user;
 
 public enum SocialMediaService {
 	
