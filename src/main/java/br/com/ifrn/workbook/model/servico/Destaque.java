@@ -22,7 +22,7 @@ public class Destaque extends BaseEntity<Long> {
 	@Column(name = "destaque_id")
 	private Long id;
 
-	@ManyToOne @JoinColumn(name = "servico", nullable = false)
+	@ManyToOne @JoinColumn(name = "servico", nullable = false, unique = true)
 	private Servico servico;
 	
 	@Temporal(TemporalType.TIMESTAMP)
