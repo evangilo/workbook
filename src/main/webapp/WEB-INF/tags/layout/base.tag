@@ -38,7 +38,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="isAnonymous()">
-				<li><a href="<c:url value="/usuario/registrar"/>">Registrar</a></li>
+				<li><a href="<c:url value="/usuario/criar"/>">Registrar</a></li>
 				<li><a href="<c:url value="/login"/>">Entrar</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">

@@ -1,35 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layout"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<layout:base>
+	<aside id="main" class="col-md-12">
+		<form class="form-horizontal" name='f' action='/login' method='POST'>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="text" name="username" class="form-control" />
+				</div>
+			</div>
 
-<link href="resources/css/bootstrap.css" rel="stylesheet" media="screen">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Senha</label>
+				<div class="col-sm-10">
+					<input type="password" name="password" class="form-control" />
+				</div>
+			</div>
 
-</head>
-<body>
-	<form name='f' action='/login' method='POST'>
-		<table>
-			<tr>
-				<td>Usuário:</td>
-				<td><input type='text' name='username' value=''></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='password' /></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit" value="Login" /></td>
-			</tr>
-		</table>
-	</form>
-	
-	<form action="/connect/facebook" method="POST">
-		<input type="hidden" name="scope" value="read_stream" />
-		<button type="submit">Connect to Facebook</button>
-	</form>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-success">Entrar</button>
+				</div>
+			</div>
+		</form>
 
-</body>
-</html>
+		<form class="form-horizontal" action="/connect/facebook" method="POST">
+			<input type="hidden" name="scope" value="read_stream"></input>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-success">Connect to
+						Facebook</button>
+				</div>
+			</div>
+		</form>
+	</aside>
+</layout:base>
