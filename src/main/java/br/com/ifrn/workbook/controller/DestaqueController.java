@@ -75,7 +75,7 @@ public class DestaqueController {
 	@RequestMapping(value = "meus_destaques", method=RequestMethod.GET)
 	public ModelAndView listarDestaquesUsuario() {		
 		List<Destaque> destaques = destaqueService.getServicosEmDestaque(SecurityContextUtils.getUser(userService));
-		return new ModelAndView("destaques/listar", "destaques", destaques);
+		return new ModelAndView("destaque/listar", "destaques", destaques);
 	}	
 
 	private Map<String, Object> getMapView(Destaque destaque, Long servicoID) {
