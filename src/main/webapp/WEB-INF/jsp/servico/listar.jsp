@@ -1,12 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layout"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<layout:base>
+	<aside id="main" class="col-md-12">
+		<div class="row">
+			<div class="col-sm-6">
+				<h1>Meus Serviços</h1>
+			</div>
+			<div class="col-sm-6 text-right">
+				<a class="btn btn-primary" href="form">Cadastrar Serviço</a>
+			</div>
+		</div>
+		<div class="row">
+			<c:choose>
+				<c:when test="${!empty servicos}">
+					<c:forEach items="${servicos}" var="servico">
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div class="thumbnail">
+								<img src="http://placehold.it/350x120" alt="">
+								<div class="caption">
+									<h3>
+										<a href="${servico.id}">${servico.titulo}</a>
+									</h3>
+								</div>
+								<div class="hidden-xs">
+									<p class="text-list">${servico.descricao}</p>
+								</div>
+								<div class="pull-right">
+									<a href="editar/${servico.id}"><i
+										class="glyphicon glyphicon-edit"></i> Editar</a> <a
+										href="deletar/${servico.id}"><i
+										class="glyphicon glyphicon-trash"></i>Excluir</a>
+								</div>
+								<div class="ratings">
+									<layout:stars value="${servico.media}" />
+								</div>
+								<div>
+									<a
+										href="<c:url value='/destaques/solicitar'/>?svc=${servico.id}">Colocar
+										em detaque</a>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div>Não há itens para exibir</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</aside>
+</layout:base>

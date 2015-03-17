@@ -20,6 +20,7 @@ import br.com.ifrn.workbook.model.servico.Servico;
 import br.com.ifrn.workbook.service.CategoriaService;
 import br.com.ifrn.workbook.service.CidadeService;
 import br.com.ifrn.workbook.service.ServicoService;
+import br.com.ifrn.workbook.service.UserService;
 import br.com.ifrn.workbook.utils.SecurityContextUtils;
 
 @RestController
@@ -29,12 +30,14 @@ public class ServicoController {
 	private final ServicoService servicoService;
 	private final CategoriaService categoriaService;
 	private final CidadeService cidadeService;
+	private final UserService userService;
 
 	@Inject
-	public ServicoController(ServicoService servicoService, CategoriaService categoriaService, CidadeService cidadeService) {
+	public ServicoController(ServicoService servicoService, CategoriaService categoriaService, CidadeService cidadeService, UserService userService) {
 		this.servicoService = servicoService;
 		this.categoriaService = categoriaService;
 		this.cidadeService = cidadeService;
+		this.userService = userService;
 	}
 	
 	@RequestMapping(value = "criar", method=RequestMethod.GET)
@@ -45,7 +48,7 @@ public class ServicoController {
 	@RequestMapping(value = "editar/{id}", method=RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		Servico servico = servicoService.getById(id);
-		return new ModelAndView("servico/editar", "servico", getMapView(servico));
+		return new ModelAndView("servico/editar", getMapView(servico));
 	}	
 	
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
@@ -55,7 +58,7 @@ public class ServicoController {
 	
 	@RequestMapping(value = "criar", method=RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute Servico servico, BindingResult result, RedirectAttributes redirect) {
-		setUser(servico);
+		servico.setUsuario(SecurityContextUtils.getUser(userService));
 		servicoService.create(servico);
 		redirect.addFlashAttribute("globalMessage", "Serviço criado!");
 		return new ModelAndView("redirect:listar");
@@ -63,7 +66,7 @@ public class ServicoController {
 	
 	@RequestMapping(value = "editar", method=RequestMethod.POST)
 	public ModelAndView editar(@ModelAttribute Servico servico, RedirectAttributes redirect) {
-		setUser(servico);
+		servico.setUsuario(SecurityContextUtils.getUser(userService));
 		servicoService.update(servico);
 		redirect.addFlashAttribute("globalMessage", "Serviço atualizado!");
 		return new ModelAndView("redirect:listar");
@@ -78,7 +81,7 @@ public class ServicoController {
 	
 	@RequestMapping(value = "{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
-		return new ModelAndView("servico/detalhes", "servico", servicoService.getById(id));
+		return new ModelAndView("servico/detalhar", "servico", servicoService.getById(id));
 	}
 	
 	@RequestMapping(value = "buscar", method=RequestMethod.POST) 
@@ -86,10 +89,6 @@ public class ServicoController {
 		if (descricao == null) descricao = "";
 		List<Servico> servicos = servicoService.findServicos(titulo, descricao);		
 		return new ModelAndView("servico/busca_result", getMapView(servicos));
-	}
-	
-	private void setUser(Servico servico) {
-		servico.setUsuario(SecurityContextUtils.getUser());		
 	}
 	
 	private Map<String, Object> getMapView(Servico servico) {

@@ -1,19 +1,5 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>WorkBook</title>
-</head>
-<body>
-	<p>${pageContext.request.remoteUser}</p>
-	<form:form modelAttribute="usuario" method="post" class="form-horizontal" action="${pageContext.request.contextPath}/usuario/criar">
-		<%@ include file="form.jsp" %>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-success">Registrar</button>
-			</div>
-		</div>
-	</form:form>
-</body>
-</html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:import url="form.jsp">
+	<c:param name="button_form">Registrar</c:param>
+	<c:param name="url_action">${pageContext.request.contextPath}/usuario/criar</c:param>
+</c:import>
