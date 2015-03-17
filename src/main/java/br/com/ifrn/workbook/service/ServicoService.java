@@ -20,9 +20,9 @@ public class ServicoService extends BaseService<Servico, Long> {
 		this.servicoRepository = servicoRepository;
 	}
 
-	public List<Servico> findServicos(String texto) {
+	public List<Servico> findServicos(String titulo, String descricao) {
 		return servicoRepository
-				.findByTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(texto, texto);
+				.findByTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(titulo, descricao);
 	}
 
 	public List<Servico> findServicos(Long categoria, String texto) {
@@ -34,5 +34,5 @@ public class ServicoService extends BaseService<Servico, Long> {
 	public List<Servico> findServicos(Long usuarioId) {
 		return servicoRepository.findByUsuarioOrderByMediaDesc(usuarioId);
 	}
-
+		
 }
