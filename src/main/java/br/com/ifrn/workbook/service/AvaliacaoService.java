@@ -38,7 +38,7 @@ public class AvaliacaoService extends BaseService<Avaliacao, Long> {
 	}
 	
 	public List<Avaliacao> getByServico(Long servicoID) {
-		return avaliacaoRepository.findByServico(servicoID);
+		return avaliacaoRepository.findByServicoId(servicoID);
 	}
 
 }

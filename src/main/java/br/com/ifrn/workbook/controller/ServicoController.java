@@ -87,10 +87,10 @@ public class ServicoController {
 	 * Método para detalhar o serviço
 	 * url: /servico/id
 	 */
-	@RequestMapping(value = "{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("avalicoes", avaliacaoService.getByServico(id));
+		map.put("avaliacoes", avaliacaoService.getByServico(id));
 		map.put("servico", servicoService.getById(id));
 		return new ModelAndView("servico/detalhar", map);
 	}

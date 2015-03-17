@@ -21,7 +21,7 @@
 								<img src="http://placehold.it/350x120" alt="">
 								<div class="caption">
 									<h3>
-										<a href="${servico.id}">${servico.titulo}</a>
+										<a href="detalhar/${servico.id}">${servico.titulo}</a>
 									</h3>
 								</div>
 								<div class="hidden-xs">
