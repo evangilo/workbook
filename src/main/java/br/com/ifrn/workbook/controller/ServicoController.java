@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,11 +45,13 @@ public class ServicoController {
 		this.userService = userService;
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "criar", method=RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Servico servico) {
 		return new ModelAndView("servico/criar", getMapView(new Servico()));
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "editar/{id}", method=RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		Servico servico = servicoService.getById(id);
@@ -60,6 +63,7 @@ public class ServicoController {
 		return new ModelAndView("servico/listar", "servicos", servicoService.getAll());
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "criar", method=RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute Servico servico, BindingResult result, RedirectAttributes redirect) {
 		servico.setUsuario(SecurityContextUtils.getUser(userService));
@@ -68,6 +72,7 @@ public class ServicoController {
 		return new ModelAndView("redirect:listar");
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "editar", method=RequestMethod.POST)
 	public ModelAndView editar(@ModelAttribute Servico servico, RedirectAttributes redirect) {
 		servico.setUsuario(SecurityContextUtils.getUser(userService));
@@ -76,6 +81,7 @@ public class ServicoController {
 		return new ModelAndView("redirect:listar");
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "deletar/{id}")
 	public ModelAndView deletar(@PathVariable("id") Long id, RedirectAttributes redirect) {
 		servicoService.delete(id);

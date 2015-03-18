@@ -9,7 +9,7 @@
 				<h1>Meus Serviços</h1>
 			</div>
 			<div class="col-sm-6 text-right">
-				<a class="btn btn-primary" href="form">Cadastrar Serviço</a>
+				<a class="btn btn-primary" href="criar">Cadastrar Serviço</a>
 			</div>
 		</div>
 		<div class="row">

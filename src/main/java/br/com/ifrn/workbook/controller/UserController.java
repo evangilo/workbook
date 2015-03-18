@@ -20,7 +20,7 @@ import br.com.ifrn.workbook.service.UserService;
 public class UserController {
 	
 	@Inject private UserService userService;
-	
+		
 	@RequestMapping(value="criar", method=RequestMethod.GET)
 	public ModelAndView form() {
 		return new ModelAndView("usuario/criar", "usuario", new UserAccount());
@@ -33,12 +33,13 @@ public class UserController {
 		return new ModelAndView("redirect:/");
 	}
 	
-	@Secured("ROLE_USER")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "editar/{id}", method = RequestMethod.GET )
 	public ModelAndView editar(@PathVariable Long id) {
 		return new ModelAndView("usuario/editar", "usuario", userService.getById(id));
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "editar/{id}", method = RequestMethod.POST)
 	public ModelAndView editar(@ModelAttribute UserAccount usuario, @PathVariable Long id) {
 		usuario.setId(id);
@@ -46,12 +47,14 @@ public class UserController {
 		return new ModelAndView("redirect:/");
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "deletar/{id}")
 	public ModelAndView deletar(@PathVariable Long id) {
 		userService.delete(id);
 		return new ModelAndView("redirect:/");
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "listar", method = RequestMethod.GET) 
 	public ModelAndView listar() {
 		return new ModelAndView("usuario/listar", "usuarios", userService.getAll());

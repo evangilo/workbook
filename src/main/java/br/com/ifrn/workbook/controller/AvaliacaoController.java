@@ -2,6 +2,7 @@ package br.com.ifrn.workbook.controller;
 
 import javax.inject.Inject;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +22,13 @@ public class AvaliacaoController {
 
 	@Inject private AvaliacaoService avaliacaoService;	
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "criar", method = RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Avaliacao avaliacao) {		
 		return new ModelAndView("avaliacao/criar");
 	}
 
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "editar/{id}", method = RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		Avaliacao avaliacao = avaliacaoService.getById(id);
@@ -38,6 +41,7 @@ public class AvaliacaoController {
 				avaliacaoService.getAll());
 	}
 
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "criar", method = RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute Avaliacao avaliacao, @RequestParam Long servicoID,
 			BindingResult result, RedirectAttributes redirect) {		
@@ -46,6 +50,7 @@ public class AvaliacaoController {
 		return new ModelAndView("redirect:listar");
 	}
 
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "editar", method = RequestMethod.POST)
 	public ModelAndView editar(@ModelAttribute Avaliacao avaliacao,
 			RedirectAttributes redirect) {
@@ -54,6 +59,7 @@ public class AvaliacaoController {
 		return new ModelAndView("redirect:listar");
 	}
 
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "deletar/{id}")
 	public ModelAndView deletar(@PathVariable("id") Long id,
 			RedirectAttributes redirect) {
