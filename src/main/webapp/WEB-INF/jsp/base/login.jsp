@@ -25,7 +25,7 @@
 			</div>
 		</form>
 
-		<form class="form-horizontal" action="/connect/facebook" method="POST">
+		<%-- <form class="form-horizontal" action="/connect/facebook" method="POST">
 			<input type="hidden" name="scope" value="read_stream"></input>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
@@ -33,9 +33,12 @@
 						Facebook</button>
 				</div>
 			</div>
-		</form>
-		
-		<a href="/usuario/reset_password">Esqueceu a senha?</a>
+		</form> --%>
+		<div class="form-group">
+			<div class="col-sm-offset-2">
+				<a href="/usuario/reset_password">Esqueceu a senha?</a>
+			</div>
+		</div>
 		
 	</aside>
 </layout:base>

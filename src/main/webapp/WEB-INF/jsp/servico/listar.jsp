@@ -20,23 +20,23 @@
 							<div class="thumbnail">
 								<img src="http://placehold.it/350x120" alt="">
 								<div class="caption">
-									<h3>
+									<h4>
 										<a href="detalhar/${servico.id}">${servico.titulo}</a>
-									</h3>
+									</h4>
 								</div>
-								<div class="hidden-xs">
+								<div class="hidden-xs caption">
 									<p class="text-list">${servico.descricao}</p>
 								</div>
-								<div class="pull-right">
+								<div class="pull-right caption">
 									<a href="editar/${servico.id}"><i
 										class="glyphicon glyphicon-edit"></i> Editar</a> <a
 										href="deletar/${servico.id}"><i
 										class="glyphicon glyphicon-trash"></i>Excluir</a>
 								</div>
-								<div class="ratings">
+								<div class="ratings caption">
 									<layout:stars value="${servico.media}" />
 								</div>
-								<div>
+								<div class="caption">
 									<a href="/destaques/solicitar/${servico.id}">Colocar em detaque</a>
 								</div>
 							</div>

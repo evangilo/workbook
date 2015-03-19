@@ -38,8 +38,15 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="isAnonymous()">
-				<li><a href="<c:url value="/usuario/criar"/>">Registrar</a></li>
-				<li><a href="<c:url value="/login"/>">Entrar</a></li>
+				<li><a href="<c:url value="/usuario/criar"/>">Registrar</a></li>				
+				<li class="dropdown">
+					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="<c:url value="/login"/>">Entrar</a>
+					<ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="<c:url value="/login"/>">Usuário</a></li>
+                        <li><a href="<c:url value="/connect/facebook" />">Logar com Facebook</a></li>
+                    </ul>
+				</li>
+				
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
