@@ -45,8 +45,10 @@
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li><a href="<c:url value="/categoria/listar"/>">Admininistrar</a></li>
 				</sec:authorize>
-				<sec:authorize access="!hasRole('ROLE_ADMIN')">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
                 <li class="hidden-sm"><a href="<c:url value='/destaques/listar'/>">Destaques</a></li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_USER')">
                 <li><a href="<c:url value="/servico/listar"/>">Meus Servi&ccedil;os</a></li>
                 </sec:authorize>
                 <li class="dropdown">

@@ -34,6 +34,11 @@ public class UserService extends BaseService<UserAccount, Long> {
 		return userRepository.save(user);
 	}
 	
+	public void updatePassword(UserAccount user, String password) {
+		user.setPassword(encodePassword(password));
+		super.update(user);
+	}
+	
 	@Override
 	public List<UserAccount> getAll() {	
 		return userRepository.findAll(new Sort("email"));

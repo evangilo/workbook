@@ -9,7 +9,7 @@ import br.com.ifrn.workbook.model.servico.Destaque;
 
 public interface DestaqueRepository extends JpaRepository<Destaque, Long> {
 
-	@Query(value = "SELECT d FROM Destaque d WHERE d.servico.id_servico IN (SELECT s.id_servico FROM Servico s WHERE s.usuario = ?0)", nativeQuery = true)
+	@Query(value = "SELECT d.* FROM destaque d WHERE d.servico IN (SELECT s.id_servico FROM servico s WHERE s.usuario = ?1)", nativeQuery = true)
 	List<Destaque> findAllUserServicos(Long usuarioId);
 	
 }

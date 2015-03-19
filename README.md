@@ -1,8 +1,8 @@
-# Intalar dependências
+## Instalar dependências
 	mvn install
 
-# Executar
+## Executar
 	mvn spring-boot:run
 
-# Abrir
+## Abrir
 	localhost:8080

@@ -27,12 +27,12 @@ public class ServicoService extends BaseService<Servico, Long> {
 
 	public List<Servico> findServicos(Long categoria, String texto) {
 		return servicoRepository
-				.findByCategoriaAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(
+				.findByCategoriaIdAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(
 						categoria, texto, texto);
 	}
 
 	public List<Servico> findServicos(Long usuarioId) {
-		return servicoRepository.findByUsuarioOrderByMediaDesc(usuarioId);
-	}
+		return servicoRepository.findByUsuarioIdOrderByMediaDesc(usuarioId);
+	}	
 		
 }

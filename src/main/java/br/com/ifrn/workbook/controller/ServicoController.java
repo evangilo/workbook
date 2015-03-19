@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ifrn.workbook.model.servico.Servico;
+import br.com.ifrn.workbook.service.AvaliacaoService;
 import br.com.ifrn.workbook.service.CategoriaService;
 import br.com.ifrn.workbook.service.CidadeService;
 import br.com.ifrn.workbook.service.ServicoService;
@@ -29,22 +31,27 @@ public class ServicoController {
 	
 	private final ServicoService servicoService;
 	private final CategoriaService categoriaService;
+	private final AvaliacaoService avaliacaoService;
 	private final CidadeService cidadeService;
-	private final UserService userService;
+	private final UserService userService;	
 
 	@Inject
-	public ServicoController(ServicoService servicoService, CategoriaService categoriaService, CidadeService cidadeService, UserService userService) {
+	public ServicoController(ServicoService servicoService, CategoriaService categoriaService, 
+			AvaliacaoService avaliacaoService, CidadeService cidadeService, UserService userService) {
 		this.servicoService = servicoService;
 		this.categoriaService = categoriaService;
+		this.avaliacaoService = avaliacaoService;
 		this.cidadeService = cidadeService;
 		this.userService = userService;
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "criar", method=RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Servico servico) {
 		return new ModelAndView("servico/criar", getMapView(new Servico()));
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "editar/{id}", method=RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		Servico servico = servicoService.getById(id);
@@ -56,6 +63,7 @@ public class ServicoController {
 		return new ModelAndView("servico/listar", "servicos", servicoService.getAll());
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "criar", method=RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute Servico servico, BindingResult result, RedirectAttributes redirect) {
 		servico.setUsuario(SecurityContextUtils.getUser(userService));
@@ -64,6 +72,7 @@ public class ServicoController {
 		return new ModelAndView("redirect:listar");
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "editar", method=RequestMethod.POST)
 	public ModelAndView editar(@ModelAttribute Servico servico, RedirectAttributes redirect) {
 		servico.setUsuario(SecurityContextUtils.getUser(userService));
@@ -72,6 +81,7 @@ public class ServicoController {
 		return new ModelAndView("redirect:listar");
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "deletar/{id}")
 	public ModelAndView deletar(@PathVariable("id") Long id, RedirectAttributes redirect) {
 		servicoService.delete(id);
@@ -79,9 +89,16 @@ public class ServicoController {
 		return new ModelAndView("redirect:/servico/listar");
 	}
 	
-	@RequestMapping(value = "{id}", method=RequestMethod.GET)
+	/**
+	 * Método para detalhar o serviço
+	 * url: /servico/id
+	 */
+	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
-		return new ModelAndView("servico/detalhar", "servico", servicoService.getById(id));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("avaliacoes", avaliacaoService.getByServico(id));
+		map.put("servico", servicoService.getById(id));
+		return new ModelAndView("servico/detalhar", map);
 	}
 	
 	@RequestMapping(value = "buscar", method=RequestMethod.POST) 

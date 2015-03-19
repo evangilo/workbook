@@ -10,10 +10,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import br.com.ifrn.workbook.model.user.Role;
 import br.com.ifrn.workbook.security.CurrentUserDetailsService;
 import br.com.ifrn.workbook.service.UserService;
 
@@ -47,8 +49,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)throws Exception {
-		auth.userDetailsService(userDetailsService())
-		.passwordEncoder(passwordEncoder());
+		auth
+			.inMemoryAuthentication().withUser("admin").password("admin").authorities(AuthorityUtils.createAuthorityList(Role.ROLE_ADMIN.toString()))
+			.and()
+			.withUser("user").password("user").authorities(AuthorityUtils.createAuthorityList(Role.ROLE_USER.toString()));
+		auth
+			.userDetailsService(userDetailsService())
+			.passwordEncoder(passwordEncoder());
 	}
 	
 	@Bean

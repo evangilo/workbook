@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,47 +36,51 @@ public class DestaqueController {
 		this.userService     = userService;
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "criar", method=RequestMethod.POST)
 	public ModelAndView criar(@ModelAttribute Destaque destaque) {
 		destaqueService.create(destaque);
 		return new ModelAndView("redirect:/destaques/meus_destaques");
 	}	
 
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "solicitar/{id}", method=RequestMethod.GET)
 	public ModelAndView formCriar(@PathVariable("id") Long servicoID) {		
 		return new ModelAndView("destaque/form", getMapView(new Destaque(), servicoID));
 	}
 	
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "aceitar/{id}", method=RequestMethod.GET)
 	public ModelAndView aceitar(@PathVariable("id") Long destaqueID) {
 		destaqueService.aprovarDestaque(destaqueID);
 		return new ModelAndView("redirect:/destaques/listar");
 	}
 	
-	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "cancelar/{id}", method=RequestMethod.GET)
 	public ModelAndView cancelar(@PathVariable("id") Long destaqueID) {
 		destaqueService.cancelarDestaque(destaqueID);
 		return new ModelAndView("redirect:/destaques/listar");
 	}
-	
-	@RequestMapping(value = "listar", method=RequestMethod.GET)
-	public ModelAndView listar() {
-		List<Destaque> destaques = destaqueService.getAll();
-		return new ModelAndView("destaque/listar", "destaques", destaques);
-	}	
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "deletar/{id}", method=RequestMethod.GET)
 	public ModelAndView deletar(@PathVariable("id") Long destaqueID) {
 		destaqueService.delete(destaqueID);
 		return new ModelAndView("redirect:/destaques/listar");
 	}
+		
+	@RequestMapping(value = "listar", method=RequestMethod.GET)
+	public ModelAndView listar() {
+		List<Destaque> destaques = destaqueService.getAll();
+		return new ModelAndView("destaque/listar", "destaques", destaques);
+	}	
 	
 	@RequestMapping(value = "meus_destaques", method=RequestMethod.GET)
 	public ModelAndView listarDestaquesUsuario() {		
 		List<Destaque> destaques = destaqueService.getServicosEmDestaque(SecurityContextUtils.getUser(userService));
-		return new ModelAndView("destaques/listar", "destaques", destaques);
+		return new ModelAndView("destaque/listar", "destaques", destaques);
 	}	
 
 	private Map<String, Object> getMapView(Destaque destaque, Long servicoID) {

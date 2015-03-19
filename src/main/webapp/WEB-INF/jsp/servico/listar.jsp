@@ -9,7 +9,7 @@
 				<h1>Meus Serviços</h1>
 			</div>
 			<div class="col-sm-6 text-right">
-				<a class="btn btn-primary" href="form">Cadastrar Serviço</a>
+				<a class="btn btn-primary" href="criar">Cadastrar Serviço</a>
 			</div>
 		</div>
 		<div class="row">
@@ -21,7 +21,7 @@
 								<img src="http://placehold.it/350x120" alt="">
 								<div class="caption">
 									<h3>
-										<a href="${servico.id}">${servico.titulo}</a>
+										<a href="detalhar/${servico.id}">${servico.titulo}</a>
 									</h3>
 								</div>
 								<div class="hidden-xs">
