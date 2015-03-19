@@ -34,7 +34,7 @@
 										class="glyphicon glyphicon-trash"></i>Excluir</a>
 								</div>
 								<div class="ratings">
-									<layout:stars value="${servico.media}" />
+									<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 								</div>
 								<div>
 									<a href="/destaques/solicitar/${servico.id}">Colocar em detaque</a>
