@@ -109,7 +109,7 @@ public class UserController {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo("evangilo@localhost");
 		mailMessage.setReplyTo("workbook@localhost");
-		mailMessage.setFrom("evangilo@localhost");
+		mailMessage.setFrom(reset.getUser().getEmail());
 		mailMessage.setSubject("Resetar senha workbook");
 		mailMessage.setText(getUrlPasswordReset(url, reset));
 		javaMail.send(mailMessage);
