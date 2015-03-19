@@ -13,7 +13,7 @@
 		<div class="col-md-3">
 			<h4>Avaliação</h4>
 			<div class="text-lg text-warning">
-				<layout:stars value="${servico.media}" />
+				<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servicoResult.media }" data-show-clear="false" data-show-caption="false">
 				<span class="badge badge-default text-lg"
 					title="Total de avaliações">${servico.total}</span>
 			</div>
@@ -31,35 +31,26 @@
 		<div class="col-md-12">
 			<div class="well">
 				<div class="text-right">
-					<a class="btn btn-success">Deixe sua opni&atilde;o</a>
+					<a href="<c:url value='/avaliacao/form' />/${servico.id}" class="btn btn-success">Deixe sua opni&atilde;o</a>
 				</div>
 				<hr>
 				<div class="row">
-					<div class="col-md-12">
-						<layout:stars value="5" />
-						Anonymous <span class="pull-right">10 days ago</span>
-						<p>This product was great in terms of quality. I would
-							definitely buy another!</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="col-md-12">
-						<layout:stars value="7" />
-						Anonymous <span class="pull-right">12 days ago</span>
-						<p>I've alredy ordered another one!</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="col-md-12">
-						<layout:stars value="10" />
-						Anonymous <span class="pull-right">15 days ago</span>
-						<p>I've seen some better than this, but not at this price. I
-							definitely recommend this item.</p>
-					</div>
-				</div>
-			</div>
+	        <c:choose>
+			<c:when test="${!empty avaliacaoList}">
+			<c:forEach items="${avaliacaoList}" var="avaliacao">            
+				<div class="col-md-12">
+					 <span class="pull-right"><input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${avaliacao.nota }" data-show-clear="false" data-show-caption="false"></span>
+	                
+	                <p>${avaliacao.usuario.nome}</p>
+	                <p>${avaliacao.comentario}</p>
+	            </div>
+	           </c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div>Não há itens para exibir. ;)</div>
+			</c:otherwise>
+			</c:choose>
+        </div>			</div>
 		</div>
 	</aside>
 </layout:base>
