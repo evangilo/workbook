@@ -6,8 +6,9 @@
 <aside id="main" class="col-md-12">
 	<h2>Cadastrar Avaliacao</h2>
 	<form:form id="avaliacaoForm" modelAttribute="avaliacao" method="post"
-		class="form-horizontal" action="criar_ou_atualizar?servico=${param.servico}">
-		<form:hidden path="servico" value="${param.servico}"/>
+		class="form-horizontal" action="criar">
+		
+		<input type="hidden" name="servicoID" value="${param.servicoID}"> 
 		
 		<div class="form-group">
 			<form:label path="comentario" class="col-sm-2 control-label">Comentário:</form:label>

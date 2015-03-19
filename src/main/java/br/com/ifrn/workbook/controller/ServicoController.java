@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ifrn.workbook.model.servico.Avaliacao;
 import br.com.ifrn.workbook.model.servico.Servico;
 import br.com.ifrn.workbook.service.AvaliacaoService;
 import br.com.ifrn.workbook.service.CategoriaService;
@@ -43,6 +44,7 @@ public class ServicoController {
 		this.avaliacaoService = avaliacaoService;
 		this.cidadeService = cidadeService;
 		this.userService = userService;
+
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -96,8 +98,15 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(SecurityContextUtils.getUser(userService).getId(),id );
+		boolean podeAvaliar = false;
+		if(avaliacao.isEmpty()){
+			podeAvaliar = true;
+		}
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
 		map.put("servico", servicoService.getById(id));
+		map.put("podeAvaliar", podeAvaliar);
 		return new ModelAndView("servico/detalhar", map);
 	}
 	

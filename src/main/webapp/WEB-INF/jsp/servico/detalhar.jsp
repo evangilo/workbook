@@ -13,7 +13,7 @@
 		<div class="col-md-3">
 			<h4>Avaliação</h4>
 			<div class="text-lg text-warning">
-				<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servicoResult.media }" data-show-clear="false" data-show-caption="false">
+				<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 				<span class="badge badge-default text-lg"
 					title="Total de avaliações">${servico.total}</span>
 			</div>
@@ -30,18 +30,21 @@
 		</div>
 		<div class="col-md-12">
 			<div class="well">
-				<div class="text-right">
-					<a href="<c:url value='/avaliacao/form' />/${servico.id}" class="btn btn-success">Deixe sua opni&atilde;o</a>
-				</div>
+				<c:if test="${podeAvaliar}">
+					<div class="text-right">
+					
+						<a href="<c:url value='/avaliacao/criar' />?servicoID=${servico.id}" class="btn btn-success">Deixe sua opni&atilde;o</a>
+					</div>
+				</c:if>
 				<hr>
 				<div class="row">
 	        <c:choose>
-			<c:when test="${!empty avaliacaoList}">
-			<c:forEach items="${avaliacaoList}" var="avaliacao">            
+			<c:when test="${!empty avaliacoes}">
+			<c:forEach items="${avaliacoes}" var="avaliacao">            
 				<div class="col-md-12">
 					 <span class="pull-right"><input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${avaliacao.nota }" data-show-clear="false" data-show-caption="false"></span>
 	                
-	                <p>${avaliacao.usuario.nome}</p>
+	                <p>${avaliacao.usuario.username}</p>
 	                <p>${avaliacao.comentario}</p>
 	            </div>
 	           </c:forEach>
