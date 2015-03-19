@@ -23,9 +23,9 @@
 									<h4>
 										<a href="detalhar/${servico.id}">${servico.titulo}</a>
 									</h4>
-								</div>
-								<div class="hidden-xs caption">
+								<div id="servicoList">
 									<p class="text-list">${servico.descricao}</p>
+								</div>
 								</div>
 								<div class="pull-right caption">
 									<a href="editar/${servico.id}"><i
@@ -33,11 +33,14 @@
 										href="deletar/${servico.id}"><i
 										class="glyphicon glyphicon-trash"></i>Excluir</a>
 								</div>
+
 								<div class="ratings caption">
-									<layout:stars value="${servico.media}" />
+									<input type="number" id="star-rating" class=" pull-left rating caption" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 								</div>
 								<div class="caption">
-									<a href="/destaques/solicitar/${servico.id}">Colocar em detaque</a>
+									<center>
+									<a href="/destaques/solicitar/${servico.id}">DESTACAR</a>
+									</center>
 								</div>
 							</div>
 						</div>

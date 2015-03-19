@@ -14,18 +14,21 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ifrn.workbook.model.servico.Avaliacao;
+import br.com.ifrn.workbook.model.servico.Servico;
 import br.com.ifrn.workbook.service.AvaliacaoService;
+import br.com.ifrn.workbook.service.ServicoService;
 
 @RestController
 @RequestMapping("avaliacao")
 public class AvaliacaoController {
 
-	@Inject private AvaliacaoService avaliacaoService;	
+	@Inject private AvaliacaoService avaliacaoService;
+	@Inject private ServicoService servicoService;
 	
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "criar", method = RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Avaliacao avaliacao) {		
-		return new ModelAndView("avaliacao/criar");
+		return new ModelAndView("avaliacao/form");
 	}
 
 	@Secured("ROLE_USER")
@@ -43,11 +46,16 @@ public class AvaliacaoController {
 
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "criar", method = RequestMethod.POST)
-	public ModelAndView criar(@ModelAttribute Avaliacao avaliacao, @RequestParam Long servicoID,
-			BindingResult result, RedirectAttributes redirect) {		
+	public ModelAndView criar(@ModelAttribute Avaliacao avaliacao, @RequestParam("servicoID") Long servicoID,
+			BindingResult result, RedirectAttributes redirect) {
+		
 		avaliacaoService.create(avaliacao, servicoID);
+		Servico servico = servicoService.getServicoPorID(servicoID);
+		servico.setMedia(servicoService.getMediaAvaliacoes(servicoID));
+		servico.setTotal(servicoService.getTotalAvaliacoes(servicoID));
+		servicoService.update(servico);
 		redirect.addFlashAttribute("globalMessage", "Avaliação criada!");
-		return new ModelAndView("redirect:listar");
+		return new ModelAndView("redirect:/servico/detalhar/"+servicoID);
 	}
 
 	@Secured("ROLE_USER")

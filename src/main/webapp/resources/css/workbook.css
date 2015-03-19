@@ -47,3 +47,11 @@ h1 {
 .img-responsive {
 	margin:0 auto;
 }
+
+#servicoList {
+	overflow: hidden;
+}
+
+.star-rating{
+	font-size: 1.1em;
+}

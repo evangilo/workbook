@@ -7,11 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import br.com.ifrn.workbook.model.BaseEntity;
 import br.com.ifrn.workbook.model.user.UserAccount;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_servico", "id_usuario"})})
 public class Avaliacao extends BaseEntity<Long>{
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

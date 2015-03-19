@@ -8,8 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/font-awesome-4.1.0/css/font-awesome.min.css"/>" rel="stylesheet">
+   <link href="<c:url value="/resources/css/star-rating.min.css"/>" rel="stylesheet">    
     <link href="<c:url value="/resources/css/workbook.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/star-rating.min.css"/>" rel="stylesheet">
+ 
     
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.10.2.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/star-rating.min.js"/>"></script>
