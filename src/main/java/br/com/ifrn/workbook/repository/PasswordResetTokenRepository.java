@@ -8,5 +8,7 @@ import br.com.ifrn.workbook.model.user.UserAccount;
 public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetToken, Long> {
 	
 	PasswordResetToken findByUser(UserAccount user);
+	
+	PasswordResetToken findByToken(String token);
 
 }

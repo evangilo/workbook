@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ifrn.workbook.exceptions.PasswordResetTokenException;
 import br.com.ifrn.workbook.model.PasswordResetToken;
 import br.com.ifrn.workbook.model.servico.PasswordResetTokenService;
 import br.com.ifrn.workbook.model.user.Role;
@@ -91,8 +92,17 @@ public class UserController {
 		return new ModelAndView("usuario/change_password");
 	}
 
-	public ModelAndView changePassword(@RequestParam("user") Long user, @RequestParam("password") String password, @RequestParam("token") String token) {
-		return null;
+	@RequestMapping(value = "change_password", method = RequestMethod.POST)
+	public ModelAndView changePassword(@RequestParam("user") Long user, @RequestParam("password") String password,
+			@RequestParam("token") String token, RedirectAttributes redirect) {
+		try {
+			passwordResetTokenService.resetPassword(user, password, token);
+			redirect.addFlashAttribute("globalMessage", "senha atualizada com sucesso!");
+			return new ModelAndView("redirect:/");
+		} catch (PasswordResetTokenException e) {
+			redirect.addFlashAttribute("globalMessage", "token inválido!");
+			return new ModelAndView("redirect:/error");
+		}
 	}
 	
 	private void sendEmail(String url, PasswordResetToken reset) {
@@ -110,7 +120,7 @@ public class UserController {
 	}
 	
 	private String getUrlPasswordReset(String url, PasswordResetToken reset) {
-		return String.format("%s/usuario/change_password?user=%s&token=&%s", url, reset.getUser().getId(), reset.getToken());
+		return String.format("%s/usuario/change_password?user=%s&token=%s", url, reset.getUser().getId(), reset.getToken());
 	}
 	
 }

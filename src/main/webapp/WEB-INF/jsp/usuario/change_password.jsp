@@ -5,9 +5,9 @@
 	
 		<p>${globalMessage}</p>
 
-		<form class="navbar-form navbar-left" action="reset_password" method="post">
-			<form:hidden type="text" value="${param.user}"/>
-			<form:hidden type="text" value="${param.token}"/>
+		<form class="navbar-form navbar-left" action="change_password" method="post">
+			<input type="hidden" name="user" value="${param.user}"/>
+			<input type="hidden" name="token" value="${param.token}"/>
 			<label>Password</label>
 			<div class="form-group">
 				<input type="text" name="password" class="form-control" placeholder="senha">
