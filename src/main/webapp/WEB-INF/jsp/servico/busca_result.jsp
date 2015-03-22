@@ -32,10 +32,10 @@
 				<div class="caption">
 					<h3><a href="detalhar?id=${servico.id}">${servico.titulo}</a></h3>
 				</div>
-				<div class="hidden-xs">
+				<div class="caption hidden-xs">
 					<p class="text-list">${servico.descricao}</p>
 				</div>
-	            <div class="ratings">
+	            <div class="caption ratings">
 	            	<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 	           	</div>
 	         </div>

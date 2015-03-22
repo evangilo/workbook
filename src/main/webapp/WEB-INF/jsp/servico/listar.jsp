@@ -38,16 +38,14 @@
 									<input type="number" id="star-rating" class=" pull-left rating caption" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 								</div>
 								<div class="caption">
-									<center>
-									<a href="/destaques/solicitar/${servico.id}">DESTACAR</a>
-									</center>
+									<a class='btn btn-default btn-block' href="/destaques/solicitar/${servico.id}">DESTACAR</a>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<div>Não há itens para exibir</div>
+					<div class="well text-center">Nenhum servi&ccedil;o cadastrado</div>
 				</c:otherwise>
 			</c:choose>
 		</div>

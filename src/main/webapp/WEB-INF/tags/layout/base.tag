@@ -8,10 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/font-awesome-4.1.0/css/font-awesome.min.css"/>" rel="stylesheet">
-   <link href="<c:url value="/resources/css/star-rating.min.css"/>" rel="stylesheet">    
+    <link href="<c:url value="/resources/css/star-rating.min.css"/>" rel="stylesheet">    
     <link href="<c:url value="/resources/css/workbook.css"/>" rel="stylesheet">
- 
-    
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.10.2.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/star-rating.min.js"/>"></script>
     <title>WorkBook</title>
@@ -46,12 +44,11 @@
                         <li><a href="<c:url value="/login"/>">Usuário</a></li>
                         <li><a href="<c:url value="/connect/facebook" />">Logar com Facebook</a></li>
                     </ul>
-				</li>
-				
+				</li>				
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li><a href="<c:url value="/categoria/listar"/>">Admininistrar</a></li>
+				<li><a href="<c:url value="/categoria/listar"/>">Categorias</a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
                 <li class="hidden-sm"><a href="<c:url value='/destaques/listar'/>">Destaques</a></li>

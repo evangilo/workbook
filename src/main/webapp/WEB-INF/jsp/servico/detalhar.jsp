@@ -16,9 +16,7 @@
 				<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 			</div>
 			<div>
-			<h4>Quantidade de Avaliações</h4>
-				<span class="badge badge-default text-lg"
-					title="Total de avaliações">${servico.total}</span>
+				<span class="text-lg" title="Total de avaliações">${servico.total} Avaliações</span>
 			</div>
 			<h4>Categoria</h4>
 			<div>${servico.categoria.nome}</div>
