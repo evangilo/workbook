@@ -111,9 +111,15 @@ public class ServicoController {
 	}
 	
 	@RequestMapping(value = "buscar", method=RequestMethod.GET) 
-	public ModelAndView buscar(@RequestParam("s") String titulo, @RequestParam(value="c",required=false) String descricao) {
-		if (descricao == null) descricao = "";
-		List<Servico> servicos = servicoService.findServicos(titulo, titulo);		
+	public ModelAndView buscar(
+			@RequestParam("s") String busca,
+			@RequestParam(value="c", required=false) String categoria) {
+		List<Servico> servicos;
+		if (categoria == null) {
+			servicos = servicoService.findServicos(busca, busca);
+		} else {
+			servicos = servicoService.findServicos(Long.valueOf(categoria), busca);
+		}
 		return new ModelAndView("servico/busca_result", getMapView(servicos));
 	}
 	
