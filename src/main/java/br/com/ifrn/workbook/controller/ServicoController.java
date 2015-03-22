@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ifrn.workbook.model.servico.Avaliacao;
 import br.com.ifrn.workbook.model.servico.Servico;
+import br.com.ifrn.workbook.security.CurrentUser;
 import br.com.ifrn.workbook.service.AvaliacaoService;
 import br.com.ifrn.workbook.service.CategoriaService;
 import br.com.ifrn.workbook.service.CidadeService;
@@ -60,9 +63,12 @@ public class ServicoController {
 		return new ModelAndView("servico/editar", getMapView(servico));
 	}	
 	
+	@Secured({"ROLE_USER"})
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
-	public ModelAndView listar() {				
-		return new ModelAndView("servico/listar", "servicos", servicoService.getAll());
+	public ModelAndView listar() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CurrentUser usuario = (CurrentUser) authentication.getPrincipal();
+		return new ModelAndView("servico/listar", "servicos", servicoService.findServicos(usuario.getId()));
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
