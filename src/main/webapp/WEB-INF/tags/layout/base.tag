@@ -48,11 +48,11 @@
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li><a href="<c:url value='/destaques/listar'/>">Destaques</a></li>
 				<li><a href="<c:url value="/categoria/listar"/>">Categorias</a></li>
-				<li class="hidden-sm"><a href="<c:url value='/destaques/listar'/>">Destaques</a></li>
 				</sec:authorize>
                 <sec:authorize access="hasRole('ROLE_USER')">
-                <li class="hidden-sm"><a href="<c:url value='/destaques/meus_destaques'/>">Destaques</a></li>
+                <li><a href="<c:url value='/destaques/meus_destaques'/>">Destaques</a></li>
                 <li><a href="<c:url value="/servico/listar"/>">Meus Servi&ccedil;os</a></li>
                 </sec:authorize>
                 <li class="dropdown">
