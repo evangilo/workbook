@@ -31,31 +31,29 @@
 		</div>
 		<div class="col-md-12">
 			<div class="well">
-				<c:if test="${podeAvaliar}">
-					<div class="text-right">
-					
-						<a href="<c:url value='/avaliacao/criar' />?servicoID=${servico.id}" class="btn btn-success">Deixe sua opni&atilde;o</a>
-					</div>
-				</c:if>
-				<hr>
-				<div class="row">
+			<c:if test="${podeAvaliar}">
+				<div class="text-right">
+					<a href="<c:url value='/avaliacao/criar' />?servicoID=${servico.id}" class="btn btn-success">Deixe sua opni&atilde;o</a>
+				</div>
+			</c:if>
 	        <c:choose>
 			<c:when test="${!empty avaliacoes}">
-			<c:forEach items="${avaliacoes}" var="avaliacao">            
-				<div class="col-md-12">
-					<h3>
-					 <span class="pull-right"><input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${avaliacao.nota }" data-show-clear="false" data-show-caption="false"></span>
-	                </h3>
-	                <p>${avaliacao.usuario.username}</p>
-	                <p>${avaliacao.comentario}</p>
-	            </div>
-	           </c:forEach>
+			<c:forEach items="${avaliacoes}" var="avaliacao">
+				<hr>
+				<div class="row">           
+						<div class="col-md-12">
+							<span class="pull-right"><input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${avaliacao.nota }" data-show-clear="false" data-show-caption="false"></span>
+			                <b>${avaliacao.usuario.firstName} ${avaliacao.usuario.lastName}</b>
+			                <p>${avaliacao.comentario}</p>
+			            </div>
+		        </div>
+	            </c:forEach>
 			</c:when>
 			<c:otherwise>
-				<div>Não há itens para exibir. ;)</div>
+				<div>Ainda não foi feito nenhum comentário</div>
 			</c:otherwise>
 			</c:choose>
-        </div>			</div>
+        	</div>
 		</div>
 	</aside>
 </layout:base>
