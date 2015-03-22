@@ -7,8 +7,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ifrn.workbook.model.servico.Avaliacao;
 import br.com.ifrn.workbook.model.servico.Servico;
-import br.com.ifrn.workbook.security.CurrentUser;
 import br.com.ifrn.workbook.service.AvaliacaoService;
 import br.com.ifrn.workbook.service.CategoriaService;
 import br.com.ifrn.workbook.service.CidadeService;
@@ -66,9 +63,8 @@ public class ServicoController {
 	@Secured({"ROLE_USER"})
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
 	public ModelAndView listar() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		CurrentUser usuario = (CurrentUser) authentication.getPrincipal();
-		return new ModelAndView("servico/listar", "servicos", servicoService.findServicos(usuario.getId()));
+		return new ModelAndView("servico/listar", "servicos",
+				servicoService.findServicos(SecurityContextUtils.getCurrentUser().getId()));
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -104,12 +100,18 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(SecurityContextUtils.getUser(userService).getId(),id );
 		boolean podeAvaliar = false;
-		if(avaliacao.isEmpty()){
+
+		if (SecurityContextUtils.isAuthenticated()) { 
+			List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(
+					SecurityContextUtils.getCurrentUser().getId(), id);
+			if(avaliacao.isEmpty()){
+				podeAvaliar = true;
+			}
+		} else {
 			podeAvaliar = true;
 		}
+
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
 		map.put("servico", servicoService.getById(id));
 		map.put("podeAvaliar", podeAvaliar);
