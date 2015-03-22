@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.ifrn.workbook.model.servico.Servico;
-import br.com.ifrn.workbook.service.AvaliacaoService;
 import br.com.ifrn.workbook.service.CategoriaService;
-import br.com.ifrn.workbook.service.CidadeService;
 import br.com.ifrn.workbook.service.ServicoService;
-import br.com.ifrn.workbook.service.UserService;
 
 @Controller
 @RequestMapping("/")
