@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.ifrn.workbook.model.servico.Servico;
 
-public interface ServicoRepository extends JpaRepository<Servico, Long>{
-
+public interface ServicoRepository extends JpaRepository<Servico, Long>{	
+	
 	List<Servico> findByTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(String titulo, String descricao);
 	
 	List<Servico> findByCategoriaIdAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(Long categoria, String titulo, String descricao);

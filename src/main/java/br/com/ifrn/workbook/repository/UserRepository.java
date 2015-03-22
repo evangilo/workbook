@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<UserAccount, Long> {
 	
 	UserAccount findOneByEmail(String email);
 	
-	List<UserAccount> findByEmailIn(Collection<String> emails);
+	List<UserAccount> findByFacebookIdIn(Collection<String> emails);
 
 }

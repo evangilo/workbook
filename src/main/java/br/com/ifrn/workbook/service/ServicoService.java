@@ -25,6 +25,11 @@ public class ServicoService extends BaseService<Servico, Long> {
 		this.servicoRepository = servicoRepository;
 		this.avaliacaoRepository = avaliacaoRepository;
 	}
+	
+	@Override
+	public List<Servico> getAll() {
+		return super.getAll();
+	}
 
 	public List<Servico> findServicos(String descricao) {
 		return servicoRepository

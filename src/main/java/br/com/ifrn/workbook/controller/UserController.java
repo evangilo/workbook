@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ifrn.workbook.exceptions.PasswordResetTokenException;
+import br.com.ifrn.workbook.exceptions.UserActiveException;
 import br.com.ifrn.workbook.model.PasswordResetToken;
 import br.com.ifrn.workbook.model.servico.PasswordResetTokenService;
 import br.com.ifrn.workbook.model.user.Role;
 import br.com.ifrn.workbook.model.user.UserAccount;
+import br.com.ifrn.workbook.service.FacebookService;
 import br.com.ifrn.workbook.service.UserService;
 
 @RestController
@@ -30,6 +33,7 @@ public class UserController {
 	@Inject private UserService userService;
 	@Inject private JavaMailSender javaMail;
 	@Inject private PasswordResetTokenService passwordResetTokenService;
+	@Inject private FacebookService facebookService;
 		
 	@RequestMapping(value="criar", method=RequestMethod.GET)
 	public ModelAndView form() {
@@ -77,7 +81,13 @@ public class UserController {
 	
 	@RequestMapping(value = "reset_password", method = RequestMethod.POST)
 	public ModelAndView resetPassword(@RequestParam("email") String email, HttpServletRequest request, RedirectAttributes redirect) {
-		UserAccount user = userService.getByEmail(email);
+		UserAccount user;
+		try {
+			user = userService.getByEmail(email);
+		} catch (UsernameNotFoundException e) {
+			redirect.addFlashAttribute("globalMessage", "usuário suspenso :(");
+			return new ModelAndView("redirect:/error");
+		}
 		if (user != null) {
 			redirect.addFlashAttribute("globalMessage", "email enviado!");
 			sendEmail(getUrlServer(request), passwordResetTokenService.createPasswordReset(user));
@@ -105,6 +115,18 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value = "active/{user}/{active}")
+	public ModelAndView active(@PathVariable("user") Long userId, @PathVariable("active") boolean active, RedirectAttributes redirect) {
+		UserAccount user = userService.getById(userId);
+		if (user == null) {
+			redirect.addFlashAttribute("globalMessage", "Erro ao desativar/ativar o usuário");
+			return new ModelAndView("redirect:/error");
+		}
+		user.setActive(active);
+		userService.update(user);
+		return new ModelAndView("redirect:/usuario/listar");
+	}
+	
 	private void sendEmail(String url, PasswordResetToken reset) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo("evangilo@localhost");
@@ -121,6 +143,11 @@ public class UserController {
 	
 	private String getUrlPasswordReset(String url, PasswordResetToken reset) {
 		return String.format("%s/usuario/change_password?user=%s&token=%s", url, reset.getUser().getId(), reset.getToken());
+	}
+	
+	@RequestMapping("amigos")
+	public ModelAndView listarAmigos() {
+		return new ModelAndView("/usuario/listar_amigos", "friends", facebookService.getFriends());
 	}
 	
 }

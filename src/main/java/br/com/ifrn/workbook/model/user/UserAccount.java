@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import br.com.ifrn.workbook.model.BaseEntity;
@@ -18,6 +19,9 @@ public class UserAccount extends BaseEntity<Long> {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id", nullable = false)
 	private Long id;
+	
+	@Column(name = "facebook_id", unique = true)
+	private String facebookId;
 
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
@@ -38,6 +42,9 @@ public class UserAccount extends BaseEntity<Long> {
 	@Column(name = "role", length = 20, nullable = false)
 	private Role role;
 	
+	@Column(name = "active")
+	private boolean active;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sign_in_provider", length = 20)
 	private SocialMediaService signInProvider;
@@ -47,10 +54,18 @@ public class UserAccount extends BaseEntity<Long> {
 	@Override
 	public Long getId() {
 		return id;
-	}
+	}		
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getFacebookId() {
+		return facebookId;
+	}
+	
+	public void setFacebookId(String facebookId) {
+		this.facebookId = facebookId;
 	}
 
 	public String getFirstName() {
@@ -100,6 +115,14 @@ public class UserAccount extends BaseEntity<Long> {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	public boolean isActive() {
+		return active;
+	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 	public SocialMediaService getSignInProvider() {
 		return signInProvider;
@@ -107,6 +130,18 @@ public class UserAccount extends BaseEntity<Long> {
 
 	public void setSignInProvider(SocialMediaService signInProvider) {
 		this.signInProvider = signInProvider;
+	}
+	
+	@Override
+	public String toString() {	
+		return String.format("username: %s email %s\n", username, email);
+	}
+	
+	@Override
+	@PrePersist
+	protected void prePersist() {
+		this.active = true;
+		super.prePersist();
 	}
 	
 }

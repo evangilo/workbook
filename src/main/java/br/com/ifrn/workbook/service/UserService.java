@@ -5,9 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.ifrn.workbook.exceptions.UserActiveException;
 import br.com.ifrn.workbook.model.user.UserAccount;
 import br.com.ifrn.workbook.repository.UserRepository;
 
@@ -25,8 +27,10 @@ public class UserService extends BaseService<UserAccount, Long> {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public UserAccount getByEmail(String email) {
-		return userRepository.findOneByEmail(email);
+	public UserAccount getByEmail(String email) throws UsernameNotFoundException {
+		UserAccount user = userRepository.findOneByEmail(email);
+		if (user.isActive()) return user;
+		throw new UsernameNotFoundException("usuário supenso :(");
 	}
 	
 	public UserAccount registerNewUserAccount(UserAccount user) {
@@ -37,7 +41,7 @@ public class UserService extends BaseService<UserAccount, Long> {
 	public void updatePassword(UserAccount user, String password) {
 		user.setPassword(encodePassword(password));
 		super.update(user);
-	}
+	}	
 	
 	@Override
 	public List<UserAccount> getAll() {	
@@ -47,5 +51,4 @@ public class UserService extends BaseService<UserAccount, Long> {
 	private String encodePassword(String password) {
 		return passwordEncoder.encode(password);
 	}
-	
 }
