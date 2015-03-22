@@ -60,9 +60,11 @@ public class ServicoController {
 		return new ModelAndView("servico/editar", getMapView(servico));
 	}	
 	
+	@Secured({"ROLE_USER"})
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
-	public ModelAndView listar() {				
-		return new ModelAndView("servico/listar", "servicos", servicoService.getAll());
+	public ModelAndView listar() {
+		return new ModelAndView("servico/listar", "servicos",
+				servicoService.findServicos(SecurityContextUtils.getCurrentUser().getId()));
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -98,12 +100,18 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(SecurityContextUtils.getUser(userService).getId(),id );
 		boolean podeAvaliar = false;
-		if(avaliacao.isEmpty()){
+
+		if (SecurityContextUtils.isAuthenticated()) { 
+			List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(
+					SecurityContextUtils.getCurrentUser().getId(), id);
+			if(avaliacao.isEmpty()){
+				podeAvaliar = true;
+			}
+		} else {
 			podeAvaliar = true;
 		}
+
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
 		map.put("servico", servicoService.getById(id));
 		map.put("podeAvaliar", podeAvaliar);
@@ -111,9 +119,15 @@ public class ServicoController {
 	}
 	
 	@RequestMapping(value = "buscar", method=RequestMethod.GET) 
-	public ModelAndView buscar(@RequestParam("s") String titulo, @RequestParam(value="c",required=false) String descricao) {
-		if (descricao == null) descricao = "";
-		List<Servico> servicos = servicoService.findServicos(titulo, titulo);		
+	public ModelAndView buscar(
+			@RequestParam("s") String busca,
+			@RequestParam(value="c", required=false) String categoria) {
+		List<Servico> servicos;
+		if (categoria == null) {
+			servicos = servicoService.findServicos(busca, busca);
+		} else {
+			servicos = servicoService.findServicos(Long.valueOf(categoria), busca);
+		}
 		return new ModelAndView("servico/busca_result", getMapView(servicos));
 	}
 	
