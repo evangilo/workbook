@@ -1,5 +1,8 @@
 package br.com.ifrn.workbook.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ifrn.workbook.exceptions.EmailException;
 import br.com.ifrn.workbook.exceptions.PasswordResetTokenException;
 import br.com.ifrn.workbook.exceptions.UserActiveException;
+import br.com.ifrn.workbook.exceptions.UsernameException;
 import br.com.ifrn.workbook.model.PasswordResetToken;
 import br.com.ifrn.workbook.model.servico.PasswordResetTokenService;
 import br.com.ifrn.workbook.model.user.Role;
@@ -41,9 +46,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "criar", method= RequestMethod.POST)
-	public ModelAndView criar(@ModelAttribute UserAccount usuario) {
-		usuario.setRole(Role.ROLE_USER);
-		userService.registerNewUserAccount(usuario);
+	public ModelAndView criar(@ModelAttribute UserAccount usuario) {		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("usuario", usuario);
+		try {
+			usuario.setRole(Role.ROLE_USER);		
+			userService.registerNewUserAccount(usuario);
+		} catch (EmailException e) {
+			map.put("email_error", "Email já está cadastrado!");
+			return new ModelAndView("redirect:/usuario/criar", map);
+		}
 		return new ModelAndView("redirect:/");
 	}
 	

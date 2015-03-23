@@ -18,10 +18,7 @@ public class UserAccount extends BaseEntity<Long> {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id", nullable = false)
-	private Long id;
-	
-	@Column(name = "facebook_id", unique = true)
-	private String facebookId;
+	private Long id;	
 
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
@@ -29,8 +26,8 @@ public class UserAccount extends BaseEntity<Long> {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "username", nullable = false, unique = true)
-	private String username;
+	/*@Column(name = "username", nullable = false, unique = true)
+	private String username;*/
 
 	@Column(name = "password", nullable = false)
 	private String password;
@@ -58,15 +55,7 @@ public class UserAccount extends BaseEntity<Long> {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public String getFacebookId() {
-		return facebookId;
-	}
-	
-	public void setFacebookId(String facebookId) {
-		this.facebookId = facebookId;
-	}
+	}	
 
 	public String getFirstName() {
 		return firstName;
@@ -84,13 +73,13 @@ public class UserAccount extends BaseEntity<Long> {
 		this.lastName = lastName;
 	}
 
-	public String getUsername() {
+	/*public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
+	}*/
 
 	public String getPassword() {
 		return password;
@@ -134,7 +123,7 @@ public class UserAccount extends BaseEntity<Long> {
 	
 	@Override
 	public String toString() {	
-		return String.format("username: %s email %s\n", username, email);
+		return String.format("email %s\n", email);
 	}
 	
 	@Override

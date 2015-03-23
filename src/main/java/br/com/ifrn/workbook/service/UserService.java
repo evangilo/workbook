@@ -9,7 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.ifrn.workbook.exceptions.UserActiveException;
+import br.com.ifrn.workbook.exceptions.EmailException;
+import br.com.ifrn.workbook.exceptions.UsernameException;
 import br.com.ifrn.workbook.model.user.UserAccount;
 import br.com.ifrn.workbook.repository.UserRepository;
 
@@ -33,7 +34,8 @@ public class UserService extends BaseService<UserAccount, Long> {
 		throw new UsernameNotFoundException("usuário supenso :(");
 	}
 	
-	public UserAccount registerNewUserAccount(UserAccount user) {
+	public UserAccount registerNewUserAccount(UserAccount user) throws EmailException {
+		validarUser(user);
 		user.setPassword(encodePassword(user.getPassword()));
 		return userRepository.save(user);
 	}
@@ -50,5 +52,11 @@ public class UserService extends BaseService<UserAccount, Long> {
 	
 	private String encodePassword(String password) {
 		return passwordEncoder.encode(password);
+	}
+	
+
+	private void validarUser(UserAccount user) throws EmailException {
+		UserAccount account = userRepository.findOneByEmail(user.getEmail());
+		if (account != null) throw new EmailException("Email inválido.");
 	}
 }
