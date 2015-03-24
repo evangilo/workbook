@@ -13,12 +13,12 @@ import br.com.ifrn.workbook.repository.UserRepository;
 @Service
 public class FacebookService {
 	
-	@Inject Facebook facebook;
+	/*@Inject Facebook facebook;
 	@Inject UserRepository userRepository;
 	
 	public List<UserAccount> getFriends() {
 		List<String> friendIDs = facebook.friendOperations().getFriendIds();		
 		return userRepository.findByFacebookIdIn(friendIDs);
-	}
+	}*/
 
 }

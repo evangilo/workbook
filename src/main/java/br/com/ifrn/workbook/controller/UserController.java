@@ -157,9 +157,9 @@ public class UserController {
 		return String.format("%s/usuario/change_password?user=%s&token=%s", url, reset.getUser().getId(), reset.getToken());
 	}
 	
-	@RequestMapping("amigos")
+	/*@RequestMapping("amigos")
 	public ModelAndView listarAmigos() {
 		return new ModelAndView("/usuario/listar_amigos", "friends", facebookService.getFriends());
-	}
+	}*/
 	
 }
