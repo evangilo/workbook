@@ -101,10 +101,12 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		Long id_usuario = SecurityContextUtils.getUser(userService).getId();
 		boolean podeAvaliar = false;
+		Servico servico = servicoService.getById(id);
 		if (SecurityContextUtils.isAuthenticated()) { 
 			List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(
-					SecurityContextUtils.getCurrentUser().getId(), id);
+					id_usuario, id);
 			if(avaliacao.isEmpty() && id_usuario != servico.getUsuario().getId()){
 				podeAvaliar = true;
 			}
@@ -117,7 +119,7 @@ public class ServicoController {
 		map.put("podeAvaliar", podeAvaliar);
 		return new ModelAndView("servico/detalhar", map);
 	}
-
+	
 	@RequestMapping(value = "buscar", method=RequestMethod.GET) 
 	public ModelAndView buscar(
 			@RequestParam("s") String busca,
