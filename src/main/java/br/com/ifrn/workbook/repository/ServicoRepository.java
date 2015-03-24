@@ -19,4 +19,8 @@ public interface ServicoRepository extends JpaRepository<Servico, Long>{
 	Servico findById(Long id);
 	
 	List<Servico> findByDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(String descricao);
+
+	List<Servico> findByTituloContainingOrDescricaoContainingOrderByMediaDescTotalDesc(String titulo, String descricao);
+
+	List<Servico> findByMedia(int media);
 }

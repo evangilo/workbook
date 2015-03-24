@@ -30,7 +30,8 @@
 			<div class="thumbnail">
 				<img src="http://placehold.it/350x120" alt="">
 				<div class="caption">
-					<h4><a href="<c:url value="/servico/detalhar"/>/${servico.id}">${servico.titulo}</a></h4>
+
+				<h3><a href="detalhar/${servico.id}">${servico.titulo}</a></h3>
 				</div>
 				<div class="caption hidden-xs">
 					<p class="text-list">${servico.descricao}</p>

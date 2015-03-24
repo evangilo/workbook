@@ -5,11 +5,18 @@
 <layout:base>
 	<aside id="main" class="col-md-12">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-3">
 				<h1>Meus Serviços</h1>
 			</div>
-			<div class="col-sm-6 text-right">
-				<a class="btn btn-primary" href="criar">Cadastrar Serviço</a>
+			
+			<div class="col-sm-9 text-right">
+				<div class="col-sm-3 pull-right">
+					<a class="btn btn-primary" href="criar">Cadastrar Serviço</a>
+				</div>
+				<div class="col-sm-6 pull-right">
+					Filtrar por avaliação: <input type="number" id="star-rating" class=" pull-left rating caption" data-size="xs" value="0" data-show-clear="false" data-show-caption="false">
+				</div>
+				
 			</div>
 		</div>
 		<div class="row">
@@ -51,3 +58,11 @@
 		</div>
 	</aside>
 </layout:base>
+<script type="text/javascript">
+$(function($){
+	$("#star-rating").on('rating.change', function(event, value, caption) {
+		window.location.href= "/servico/listarPorAvaliacao/"+value;
+		
+	});
+});
+</script>
