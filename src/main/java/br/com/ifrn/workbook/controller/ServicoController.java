@@ -101,23 +101,14 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-<<<<<<< HEAD
-		Long id_usuario = SecurityContextUtils.getUser(userService).getId();
-		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(id_usuario,id );
 		boolean podeAvaliar = false;
-		Servico servico = servicoService.getById(id);
-		if(avaliacao.isEmpty() && id_usuario != servico.getUsuario().getId()){
-=======
-		boolean podeAvaliar = false;
-
 		if (SecurityContextUtils.isAuthenticated()) { 
 			List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(
 					SecurityContextUtils.getCurrentUser().getId(), id);
-			if(avaliacao.isEmpty()){
+			if(avaliacao.isEmpty() && id_usuario != servico.getUsuario().getId()){
 				podeAvaliar = true;
 			}
 		} else {
->>>>>>> 5ab4c556590c7fdf43b79b38c453cebbad4c4b5d
 			podeAvaliar = true;
 		}
 
@@ -126,7 +117,7 @@ public class ServicoController {
 		map.put("podeAvaliar", podeAvaliar);
 		return new ModelAndView("servico/detalhar", map);
 	}
-	
+
 	@RequestMapping(value = "buscar", method=RequestMethod.GET) 
 	public ModelAndView buscar(
 			@RequestParam("s") String busca,
