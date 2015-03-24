@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.websocket.server.PathParam;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
@@ -98,14 +99,15 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(SecurityContextUtils.getUser(userService).getId(),id );
+		Long id_usuario = SecurityContextUtils.getUser(userService).getId();
+		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(id_usuario,id );
 		boolean podeAvaliar = false;
-		if(avaliacao.isEmpty()){
+		Servico servico = servicoService.getById(id);
+		if(avaliacao.isEmpty() && id_usuario != servico.getUsuario().getId()){
 			podeAvaliar = true;
 		}
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
-		map.put("servico", servicoService.getById(id));
+		map.put("servico", servico);
 		map.put("podeAvaliar", podeAvaliar);
 		return new ModelAndView("servico/detalhar", map);
 	}
@@ -130,6 +132,12 @@ public class ServicoController {
 		map.put("servicos", servicos);
 		map.put("categorias", categoriaService.getAll());
 		return map;
+	}
+	
+	@RequestMapping(value = "listarPorAvaliacao/{avaliacao}", method=RequestMethod.GET) 
+	public ModelAndView buscarPorAvaliacao( @PathVariable("avaliacao") int avaliacao) {
+		List<Servico> servicos = servicoService.findServicosPorAvaliacao(avaliacao);		
+		return new ModelAndView("servico/busca_result", getMapView(servicos));
 	}
 
 }

@@ -30,7 +30,7 @@
 			<div class="thumbnail">
 				<img src="http://placehold.it/350x120" alt="">
 				<div class="caption">
-					<h3><a href="detalhar?id=${servico.id}">${servico.titulo}</a></h3>
+					<h3><a href="detalhar/${servico.id}">${servico.titulo}</a></h3>
 				</div>
 				<div class="hidden-xs">
 					<p class="text-list">${servico.descricao}</p>
