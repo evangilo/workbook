@@ -70,13 +70,15 @@ public class DestaqueController {
 		destaqueService.delete(destaqueID);
 		return new ModelAndView("redirect:/destaques/listar");
 	}
-		
+	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
 	public ModelAndView listar() {
 		List<Destaque> destaques = destaqueService.getAll();
 		return new ModelAndView("destaque/listar", "destaques", destaques);
 	}	
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "meus_destaques", method=RequestMethod.GET)
 	public ModelAndView listarDestaquesUsuario() {		
 		List<Destaque> destaques = destaqueService.getServicosEmDestaque(SecurityContextUtils.getUser(userService));

@@ -27,14 +27,14 @@ public abstract class BaseEntity<ID> {
 	public abstract ID getId();
 	
 	@PrePersist
-	public void prePersist() {
+	protected void prePersist() {
 		Date now = new Date();
 		createdTime  = now;
 		modifiedTime = now;
 	}
 	
 	@PreUpdate
-	public void preUpdate() {
+	protected void preUpdate() {
 		modifiedTime = new Date();
 	}
 

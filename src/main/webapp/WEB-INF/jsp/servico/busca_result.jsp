@@ -30,12 +30,16 @@
 			<div class="thumbnail">
 				<img src="http://placehold.it/350x120" alt="">
 				<div class="caption">
+<<<<<<< HEAD
 					<h3><a href="detalhar/${servico.id}">${servico.titulo}</a></h3>
+=======
+					<h4><a href="<c:url value="/servico/detalhar"/>/${servico.id}">${servico.titulo}</a></h4>
+>>>>>>> 5ab4c556590c7fdf43b79b38c453cebbad4c4b5d
 				</div>
-				<div class="hidden-xs">
+				<div class="caption hidden-xs">
 					<p class="text-list">${servico.descricao}</p>
 				</div>
-	            <div class="ratings">
+	            <div class="caption ratings">
 	            	<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="${servico.media }" data-show-clear="false" data-show-caption="false">
 	           	</div>
 	         </div>

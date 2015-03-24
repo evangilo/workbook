@@ -61,9 +61,11 @@ public class ServicoController {
 		return new ModelAndView("servico/editar", getMapView(servico));
 	}	
 	
+	@Secured({"ROLE_USER"})
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
-	public ModelAndView listar() {				
-		return new ModelAndView("servico/listar", "servicos", servicoService.getAll());
+	public ModelAndView listar() {
+		return new ModelAndView("servico/listar", "servicos",
+				servicoService.findServicos(SecurityContextUtils.getCurrentUser().getId()));
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -99,13 +101,26 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
+<<<<<<< HEAD
 		Long id_usuario = SecurityContextUtils.getUser(userService).getId();
 		List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(id_usuario,id );
 		boolean podeAvaliar = false;
 		Servico servico = servicoService.getById(id);
 		if(avaliacao.isEmpty() && id_usuario != servico.getUsuario().getId()){
+=======
+		boolean podeAvaliar = false;
+
+		if (SecurityContextUtils.isAuthenticated()) { 
+			List<Avaliacao> avaliacao = avaliacaoService.getByUsuarioEServico(
+					SecurityContextUtils.getCurrentUser().getId(), id);
+			if(avaliacao.isEmpty()){
+				podeAvaliar = true;
+			}
+		} else {
+>>>>>>> 5ab4c556590c7fdf43b79b38c453cebbad4c4b5d
 			podeAvaliar = true;
 		}
+
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
 		map.put("servico", servico);
 		map.put("podeAvaliar", podeAvaliar);
@@ -113,9 +128,15 @@ public class ServicoController {
 	}
 	
 	@RequestMapping(value = "buscar", method=RequestMethod.GET) 
-	public ModelAndView buscar(@RequestParam("s") String titulo, @RequestParam(value="c",required=false) String descricao) {
-		if (descricao == null) descricao = "";
-		List<Servico> servicos = servicoService.findServicos(titulo, titulo);		
+	public ModelAndView buscar(
+			@RequestParam("s") String busca,
+			@RequestParam(value="c", required=false) String categoria) {
+		List<Servico> servicos;
+		if (categoria == null) {
+			servicos = servicoService.findServicos(busca, busca);
+		} else {
+			servicos = servicoService.findServicos(Long.valueOf(categoria), busca);
+		}
 		return new ModelAndView("servico/busca_result", getMapView(servicos));
 	}
 	

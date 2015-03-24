@@ -20,7 +20,7 @@
 			<tbody>
 			<c:forEach items="${destaques}" var="destaque">
 				<tr>
-					<td>${destaque.servico.titulo}</td>
+					<td><a href="<c:url value="/servico/detalhar"/>/${destaque.servico.id}">${destaque.servico.titulo}</a></td>
 					<td>${destaque.servico.categoria.nome}</td>
 					<td>${destaque.tempo}</td>
 					<td>${destaque.atualizado}</td>
@@ -38,7 +38,7 @@
 						<a href="aceitar/${destaque.id}"><i class="fa fa-check-square-o"></i> Aceitar</a>
 						</c:if>
 						<c:if test="${destaque.situacao < 3}">
-						<a href="cancelar?id=${destaque.id}"><i class="fa fa-times"></i> Cancelar</a>
+						<a href="cancelar/${destaque.id}"><i class="fa fa-times"></i> Cancelar</a>
 						</c:if>
 						</sec:authorize>
 						<sec:authorize access="!hasRole('ROLE_ADMIN')">

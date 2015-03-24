@@ -27,13 +27,7 @@
 						class="form-control" />
 				</div>
 			</div>
-			<div class="form-group">
-				<form:label path="username" class="col-sm-2 control-label">Username</form:label>
-				<div class="col-sm-10">
-					<form:input path="username" value="${usuario.username}"
-						class="form-control" />
-				</div>
-			</div>
+	>
 			<div class="form-group">
 				<form:label path="password" class="col-sm-2 control-label">Senha</form:label>
 				<div class="col-sm-10">
