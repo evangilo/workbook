@@ -64,9 +64,11 @@ public class ServicoController {
 	@Secured({"ROLE_USER"})
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
 	public ModelAndView listar() {
-		return new ModelAndView("servico/listar", "servicos",
-				servicoService.findServicos(SecurityContextUtils.getCurrentUser().getId()));
+		List<Servico> servicos = servicoService.findServicos(SecurityContextUtils.getCurrentUser().getId());
+		return new ModelAndView("servico/listar",
+				getMapView(servicos));
 	}
+	
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "criar", method=RequestMethod.POST)
@@ -131,6 +133,14 @@ public class ServicoController {
 			servicos = servicoService.findServicos(Long.valueOf(categoria), busca);
 		}
 		return new ModelAndView("servico/busca_result", getMapView(servicos));
+	}
+	
+	@RequestMapping(value = "buscarPorCategoria", method=RequestMethod.GET) 
+	public ModelAndView buscarPorCategoria(
+			@RequestParam(value="c") Long categoria) {
+		List<Servico> servicos;
+			servicos = servicoService.findServicos(Long.valueOf(categoria), SecurityContextUtils.getCurrentUser().getId());
+		return new ModelAndView("servico/listar", getMapView(servicos));
 	}
 	
 	private Map<String, Object> getMapView(Servico servico) {

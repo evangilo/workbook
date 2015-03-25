@@ -47,6 +47,11 @@ public class ServicoService extends BaseService<Servico, Long> {
 				.findByCategoriaIdAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(
 						categoria, texto, texto);
 	}
+	
+	public List<Servico> findServicos(Long categoriaId, Long usuarioId) {
+		return servicoRepository
+				.findByCategoriaIdAndUsuarioId(categoriaId, usuarioId);
+	}
 
 	public List<Servico> findServicos(Long usuarioId) {
 		return servicoRepository.findByUsuarioIdOrderByMediaDesc(usuarioId);
