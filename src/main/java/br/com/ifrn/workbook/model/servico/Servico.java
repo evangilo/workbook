@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import br.com.ifrn.workbook.model.BaseEntity;
@@ -36,6 +37,7 @@ public class Servico extends BaseEntity<Long>{
 	
 	private String celular;
 	
+	@Lob	
 	private byte[] image;
 	
 	private int media;
