@@ -123,7 +123,7 @@ public class UserAccount extends BaseEntity<Long> {
 	
 	@Override
 	public String toString() {	
-		return String.format("email %s\n", email);
+		return String.format("%s %s", firstName, lastName);
 	}
 	
 	@Override
