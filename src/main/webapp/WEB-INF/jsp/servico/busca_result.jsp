@@ -31,7 +31,7 @@
 		<c:forEach items="${servicos}" var="servico">
 		<div class="col-sm-6 col-md-6 col-lg-4">
 			<div class="thumbnail">
-				<img src="<c:url value='/servico/image/${servico.id}' />" alt="Image" width="350" height="120" />
+				<img class="servico_image" src="<c:url value='/servico/image/${servico.id}' />" alt="${servico.titulo}" />
 				<div class="caption">
 
 				<h3><a href="/servico/detalhar/${servico.id}">${servico.titulo}</a></h3>

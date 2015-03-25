@@ -51,6 +51,14 @@ h1 {
 	overflow: hidden;
 }
 
+.servico_image {
+	width: 100%;
+	max-width: 100%;
+	max-height: 160px;	
+	overflow: hidden;
+}
+
+
 .star-rating{
 	font-size: 1.1em;
 }
