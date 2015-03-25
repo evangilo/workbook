@@ -56,7 +56,7 @@
 <script type="text/javascript">
 $(function($){
 	$("#star-rating").on('rating.change', function(event, value, caption) {
-		window.location.href= "/servico/listarPorAvaliacao/?s=${param.s}&c=${param.c}&a="+value;
+		window.location.href= "/servico/listarPorAvaliacao/?s=${param.s}&c=${param.c}&a="+Math.round(value);
 	});
 });
 </script>
