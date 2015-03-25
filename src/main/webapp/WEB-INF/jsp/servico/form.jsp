@@ -17,7 +17,7 @@
 		<div class="form-group">
 			<form:label path="descricao" class="col-sm-2 control-label">Descrição</form:label>
 			<div class="col-sm-10">
-				<form:input path="descricao" rows="5" value="${servico.descricao}" class="form-control"/>
+				<form:textarea path="descricao" rows="5" value="${servico.descricao}" class="form-control"/>
 			</div>
 		</div>
 		<div class="form-group">
