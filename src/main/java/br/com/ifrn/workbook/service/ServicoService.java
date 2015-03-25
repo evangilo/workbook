@@ -24,6 +24,7 @@ public class ServicoService extends BaseService<Servico, Long> {
 		super(repository);
 		this.servicoRepository = servicoRepository;
 		this.avaliacaoRepository = avaliacaoRepository;
+
 	}
 	
 	@Override
@@ -37,8 +38,8 @@ public class ServicoService extends BaseService<Servico, Long> {
 	}
 	
 	public List<Servico> findServicos(String titulo, String descricao) {
-		return servicoRepository
-				.findByTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(titulo, descricao);
+		//return servicoRepository.findByTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(titulo, descricao);
+		return servicoRepository.findByTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(titulo, descricao);
 	}
 
 	public List<Servico> findServicos(Long categoria, String texto) {
@@ -68,7 +69,10 @@ public class ServicoService extends BaseService<Servico, Long> {
 	
 	public Servico getServicoPorID(Long id){
 		return servicoRepository.findById(id);
-		
+	}
+
+	public List<Servico> findServicosPorAvaliacao(int avaliacao) {
+		return servicoRepository.findByMedia(avaliacao);
 	}
 	
 }
