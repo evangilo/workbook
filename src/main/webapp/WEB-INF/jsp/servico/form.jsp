@@ -5,7 +5,7 @@
 <layout:base>
 <aside id="main" class="col-md-12">
 	<h2>Cadastro de Serviço</h2>
-	<form:form id="servicoForm" modelAttribute="servico" method="post"
+	<form:form id="servicoForm" modelAttribute="servico" method="post" enctype="multipart/form-data"
 		class="form-horizontal" action="${param.url_action}">
 		<form:hidden path="id" value="${servico.id}"/>
 		<div class="form-group">
