@@ -14,7 +14,9 @@
 					<th>Tempo (meses)</th>
 					<th>Ultima atualização</th>
 					<th>Situação</th>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<th>Ações</th>
+					</sec:authorize>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,7 +25,7 @@
 					<td><a href="<c:url value="/servico/detalhar"/>/${destaque.servico.id}">${destaque.servico.titulo}</a></td>
 					<td>${destaque.servico.categoria.nome}</td>
 					<td>${destaque.tempo}</td>
-					<td>${destaque.atualizado}</td>
+					<td> ${destaque.atualizado}</td>
 					<td>
 						<c:choose>
 						<c:when test="${destaque.situacao == 1}">Pendente</c:when>
@@ -41,7 +43,7 @@
 						<a href="cancelar/${destaque.id}"><i class="fa fa-times"></i> Cancelar</a>
 						</c:if>
 						</sec:authorize>
-						<sec:authorize access="!hasRole('ROLE_ADMIN')">
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<c:if test="${destaque.situacao != 2}">
 						<a href="deletar/${destaque.id}"><i class="fa fa-trash-o"></i> Remover</a>
 						</c:if>
