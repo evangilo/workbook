@@ -28,6 +28,12 @@ public class ServicoService extends BaseService<Servico, Long> {
 	}
 	
 	@Override
+	public void delete(Long id) {
+		avaliacaoRepository.delete(avaliacaoRepository.findByServicoId(id));
+		super.delete(id);
+	}
+	
+	@Override
 	public List<Servico> getAll() {
 		return super.getAll();
 	}
