@@ -79,7 +79,7 @@
 <script type="text/javascript">
 $(function($){
 	$("#star-rating").on('rating.change', function(event, value, caption) {
-		window.location.href= "/servico/listarPorAvaliacao/"+value;
+		window.location.href= '<c:url value="/servico/listarPorAvaliacao"><c:param name="s" value="${param.s}" /><c:param name="c" value="${categoria.id}" /></c:url>&avaliacao'+value;
 	});
 });
 </script>

@@ -25,4 +25,13 @@ public interface ServicoRepository extends JpaRepository<Servico, Long>{
 	List<Servico> findByMedia(int media);
 	
 	List<Servico> findByCategoriaIdAndUsuarioId(Long categoriaId, Long usuarioId);
+
+	List<Servico> findByMediaAndCategoriaIdAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(
+			int media, Long categoriaId, String titulo, String descricao);
+
+	List<Servico> findByMediaAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(
+			int media, String texto, String texto2);
+
+	List<Servico> findByMediaAndCategoriaIdOrderByPatrocinadoDescMediaDescTotalDesc(
+			int avaliacao, Long categoria);
 }

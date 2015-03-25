@@ -225,9 +225,24 @@ public class ServicoController {
 		return map;
 	}
 	
-	@RequestMapping(value = "listarPorAvaliacao/{avaliacao}", method=RequestMethod.GET) 
-	public ModelAndView buscarPorAvaliacao( @PathVariable("avaliacao") int avaliacao) {
-		List<Servico> servicos = servicoService.findServicosPorAvaliacao(avaliacao);		
+	@RequestMapping(value = "listarPorAvaliacao/", method=RequestMethod.GET) 
+	public ModelAndView buscarPorAvaliacao(  @RequestParam(value="s", required=false) String busca, @RequestParam(value ="c", required=false) String categoria, @RequestParam(value = "a") String avaliacao ) {
+		List<Servico> servicos = null;
+		if(categoria ==""  && busca == ""){
+			servicos = servicoService.findServicosPorAvaliacao(Integer.parseInt(avaliacao));
+		}else{
+			if(categoria == ""){
+				servicos = servicoService.findServicosPorAvaliacaoEbusca(Integer.parseInt(avaliacao), busca);
+			}else{
+				if(busca == ""){
+					servicos = servicoService.findServicosPorAvaliacaoECategoria(Integer.parseInt(avaliacao), Long.valueOf(categoria));
+				}else{
+					servicos = servicoService.findServicosPorAvaliacaoECategoriaEBusca(Integer.parseInt(avaliacao), Long.valueOf(categoria), busca);
+				}
+			}
+
+				
+		}
 		return new ModelAndView("servico/busca_result", getMapView(servicos));
 	}
 

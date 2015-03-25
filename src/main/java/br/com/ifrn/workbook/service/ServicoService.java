@@ -54,6 +54,18 @@ public class ServicoService extends BaseService<Servico, Long> {
 						categoria, texto, texto);
 	}
 	
+	public List<Servico> findServicosPorAvaliacaoECategoriaEBusca(int avaliacao, Long categoria, String texto) {
+		return servicoRepository
+				.findByMediaAndCategoriaIdAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(avaliacao,
+						categoria, texto, texto);
+	}
+	
+	public List<Servico> findServicosPorAvaliacaoEbusca(int avaliacao, String texto) {
+		return servicoRepository
+				.findByMediaAndTituloContainingOrDescricaoContainingOrderByPatrocinadoDescMediaDescTotalDesc(avaliacao,
+						 texto, texto);
+	}
+	
 	public List<Servico> findServicos(Long categoriaId, Long usuarioId) {
 		return servicoRepository
 				.findByCategoriaIdAndUsuarioId(categoriaId, usuarioId);
@@ -84,6 +96,14 @@ public class ServicoService extends BaseService<Servico, Long> {
 
 	public List<Servico> findServicosPorAvaliacao(int avaliacao) {
 		return servicoRepository.findByMedia(avaliacao);
+	}
+
+	public List<Servico> findServicosPorAvaliacaoECategoria(int avaliacao,
+			Long categoria) {
+			return servicoRepository.findByMediaAndCategoriaIdOrderByPatrocinadoDescMediaDescTotalDesc(avaliacao, categoria);
+
+					
+					
 	}
 	
 }
