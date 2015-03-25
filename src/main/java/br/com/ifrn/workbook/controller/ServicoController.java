@@ -126,7 +126,13 @@ public class ServicoController {
 	@RequestMapping(value = "detalhar/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhar(@PathVariable("id") Long id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Long id_usuario = SecurityContextUtils.getUser(userService).getId();
+		Long id_usuario = null;
+		try{
+			id_usuario = SecurityContextUtils.getUser(userService).getId();
+		}catch(NullPointerException e){
+			
+		}
+		
 		boolean podeAvaliar = false;
 		Servico servico = servicoService.getById(id);
 		if (SecurityContextUtils.isAuthenticated()) { 
@@ -136,7 +142,7 @@ public class ServicoController {
 				podeAvaliar = true;
 			}
 		} else {
-			podeAvaliar = true;
+			podeAvaliar = false;
 		}
 		
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
