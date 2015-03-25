@@ -37,7 +37,7 @@ public class HomeController {
 	private Map<String, Object> getMapView(List<Servico> servicos) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("servicos", servicos);
-		map.put("categorias", categoriaService.getAll());
+		map.put("categorias", categoriaService.findCatergoriasWithServicos());
 		return map;
 	}
 

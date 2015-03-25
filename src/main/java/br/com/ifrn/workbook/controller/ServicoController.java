@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ifrn.workbook.model.servico.Avaliacao;
+import br.com.ifrn.workbook.model.servico.Categoria;
 import br.com.ifrn.workbook.model.servico.Servico;
 import br.com.ifrn.workbook.service.AvaliacaoService;
 import br.com.ifrn.workbook.service.CategoriaService;
@@ -74,9 +76,15 @@ public class ServicoController {
 	@Secured({"ROLE_USER"})
 	@RequestMapping(value = "listar", method=RequestMethod.GET)
 	public ModelAndView listar() {
-		List<Servico> servicos = servicoService.findServicos(SecurityContextUtils.getCurrentUser().getId());
-		return new ModelAndView("servico/listar",
-				getMapView(servicos));
+		Long userId = SecurityContextUtils.getCurrentUser().getId();
+		
+		List<Servico> servicos = servicoService.findServicos(userId);
+		List<Categoria> categorias = categoriaService.findByUser(userId);
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("servicos", servicos);
+		map.put("categorias", categorias);
+		return new ModelAndView("servico/listar",map);
 	}
 	
 	
@@ -141,8 +149,6 @@ public class ServicoController {
 			if(avaliacao.isEmpty() && id_usuario != servico.getUsuario().getId()){
 				podeAvaliar = true;
 			}
-		} else {
-			podeAvaliar = false;
 		}
 		
 		map.put("avaliacoes", avaliacaoService.getByServico(id));
@@ -190,9 +196,16 @@ public class ServicoController {
 	@RequestMapping(value = "buscarPorCategoria", method=RequestMethod.GET) 
 	public ModelAndView buscarPorCategoria(
 			@RequestParam(value="c") Long categoria) {
-		List<Servico> servicos;
-			servicos = servicoService.findServicos(Long.valueOf(categoria), SecurityContextUtils.getCurrentUser().getId());
-		return new ModelAndView("servico/listar", getMapView(servicos));
+			Long userId = SecurityContextUtils.getCurrentUser().getId();
+		
+			List<Servico> servicos = servicoService.findServicos(userId);
+			servicos = servicoService.findServicos(Long.valueOf(categoria), userId);
+			List<Categoria> categorias = categoriaService.findByUser(userId);
+			
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("servicos", servicos);
+			map.put("categorias", categorias);
+			return new ModelAndView("servico/listar",map);
 	}
 
 	
@@ -208,7 +221,7 @@ public class ServicoController {
 	private Map<String, Object> getMapView(List<Servico> servicos) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("servicos", servicos);
-		map.put("categorias", categoriaService.getAll());
+		map.put("categorias", categoriaService.findCatergoriasWithServicos());
 		return map;
 	}
 	
