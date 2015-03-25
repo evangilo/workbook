@@ -70,7 +70,7 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<div class="well text-center">Nenhum servi&ccedil;o cadastrado</div>
+					<div class="well text-center">Não há serviços à serem exibidos</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
