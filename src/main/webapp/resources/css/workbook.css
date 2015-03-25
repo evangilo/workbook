@@ -30,7 +30,6 @@ body {
 
 .rating-list {
   line-height: 1;
-
   display: inline-block;
   min-width: 10px;
 
@@ -54,4 +53,8 @@ h1 {
 
 .star-rating{
 	font-size: 1.1em;
+}
+
+.caption{
+	overflow-x:hidden;
 }
