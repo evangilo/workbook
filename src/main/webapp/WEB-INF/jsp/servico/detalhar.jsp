@@ -5,7 +5,8 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <layout:base>
 	<aside id="main" class="col-md-12">
-		<img class="img-responsive" src="http://placehold.it/1140x400" alt="">
+		<img src="<c:url value='/servico/image/${servico.id}' />" alt="Upload Image" width="800" height="300" />
+		<!--<img class="img-responsive" src="http://placehold.it/1140x400" alt="">-->
 		<div class="col-md-9">
 			<h1>${servico.titulo}</h1>
 			<div>${servico.descricao}</div>

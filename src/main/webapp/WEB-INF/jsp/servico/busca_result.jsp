@@ -19,6 +19,9 @@
 			</c:url>
 			<a class="list-group-item <c:if test="${categoria.id == param.c}">active</c:if>" href="${buscarUrl}">${categoria.nome}</a>
 			</c:forEach>
+			<div>
+				Filtrar por avaliação: <input type="number" id="star-rating" class=" pull-left rating caption" data-size="xs" value="0" data-show-clear="false" data-show-caption="false">
+			</div>
 		</div>
 	</aside>
 	<aside id="main" class="col-sm-9">
@@ -28,7 +31,7 @@
 		<c:forEach items="${servicos}" var="servico">
 		<div class="col-sm-6 col-md-6 col-lg-4">
 			<div class="thumbnail">
-				<img src="http://placehold.it/350x120" alt="">
+				<img src="<c:url value='/servico/image/${servico.id}' />" alt="Image" width="350" height="120" />
 				<div class="caption">
 
 				<h3><a href="/servico/detalhar/${servico.id}">${servico.titulo}</a></h3>
@@ -50,3 +53,10 @@
 		</div>
 	</aside>
 </layout:base>
+<script type="text/javascript">
+$(function($){
+	$("#star-rating").on('rating.change', function(event, value, caption) {
+		window.location.href= "/servico/listarPorAvaliacao/"+value;
+	});
+});
+</script>
